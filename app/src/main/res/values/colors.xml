@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="teal">#22B8B7</color>
+    <color name="orange">#FFB244</color>
+    <color name="cyan">#A0DDE6</color>
+    <color name="blue">#89C1C6</color>
+    <color name="red">#FF4545</color>
+    <color name="red43">#6EFF4545</color>
+    <color name="blue43">#6E89C1C6</color>
+    <color name="hollow_stroke">#B2B2B2</color>
+    <color name="text_teal">#55BEBE</color>
+    <color name="text_grey">#9F9F9F</color>
+</resources>

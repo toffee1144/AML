@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
+    android:paddingHorizontal="24dp"
+    android:id="@+id/checkupContainer"
+    tools:context=".homepage.checkup.CheckupFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@android:color/transparent" />
+
+    <!-- 🔙 Back Icon -->
+    <ImageView
+        android:id="@+id/imgBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:src="@drawable/ic_back"
+        android:layout_marginBottom="15dp" />
+
+    <!-- 🧠 Header Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:backgroundTint="#FFFF00"
+        android:clipToOutline="true"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report Analysis"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/teal"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Think you’re just tired? Think again\nLet’s check if it might be Sinusitis."
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_note" />
+    </LinearLayout>
+
+    <!-- 📥 Form container (dynamic fragment area) -->
+    <FrameLayout
+        android:id="@+id/formContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

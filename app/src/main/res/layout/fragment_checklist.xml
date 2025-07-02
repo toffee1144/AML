@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".homepage.report.ChecklistFragment">
+
+    <!-- Toggle Tabs: Personal Identity & Screening -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_teal_bg"
+        android:gravity="center_vertical">
+
+        <!-- Personal Identity Tab -->
+        <TextView
+            android:id="@+id/btnIdentity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Personal Identity"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:background="@drawable/shape_orange_bg"
+            android:textSize="18sp"/>
+
+        <!-- Screening Tab -->
+        <TextView
+            android:id="@+id/btnScreening"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Screening"
+            android:textColor="@color/white"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <!-- Container for the inner child fragment -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/child_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

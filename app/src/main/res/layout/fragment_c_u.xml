@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".homepage.checkup.PIFragment">
+
+    <LinearLayout
+        android:id="@+id/questionsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Screening"
+            android:textColor="@color/teal"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Question 1 -->
+        <TextView
+            android:text="1. Have your symptoms lasted more than 10 days?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+        <RadioGroup
+            android:id="@+id/radio_duration"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <RadioButton android:id="@+id/duration_1" android:text="1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/duration_2" android:text="2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/duration_3" android:text="3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/duration_4" android:text="4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/duration_5" android:text="5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <!-- Question 2 -->
+        <TextView
+            android:text="2. Do you have thick yellow or green nasal discharge?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+        <RadioGroup
+            android:id="@+id/radio_discharge"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <RadioButton android:id="@+id/discharge_1" android:text="1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/discharge_2" android:text="2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/discharge_3" android:text="3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/discharge_4" android:text="4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/discharge_5" android:text="5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <!-- Question 3 -->
+        <TextView
+            android:text="3. Have you experienced a loss of your sense of smell?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+        <RadioGroup
+            android:id="@+id/radio_anosmia"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <RadioButton android:id="@+id/anosmia_1" android:text="1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/anosmia_2" android:text="2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/anosmia_3" android:text="3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/anosmia_4" android:text="4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/anosmia_5" android:text="5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <!-- Question 4 -->
+        <TextView
+            android:text="4. Are you feeling pain or pressure in your face or cheeks?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+        <RadioGroup
+            android:id="@+id/radio_facepain"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <RadioButton android:id="@+id/facepain_1" android:text="1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/facepain_2" android:text="2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/facepain_3" android:text="3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/facepain_4" android:text="4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/facepain_5" android:text="5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <!-- Question 5 -->
+        <TextView
+            android:text="5. Have you had a fever recently?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+        <RadioGroup
+            android:id="@+id/radio_fever"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <RadioButton android:id="@+id/fever_1" android:text="1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/fever_2" android:text="2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/fever_3" android:text="3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/fever_4" android:text="4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/fever_5" android:text="5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <!-- Question 6 -->
+        <TextView
+            android:text="6. Are you experiencing nasal congestion or stuffiness?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"/>
+        <RadioGroup
+            android:id="@+id/radio_congestion"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <RadioButton android:id="@+id/congestion_1" android:text="1"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/congestion_2" android:text="2"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/congestion_3" android:text="3"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/congestion_4" android:text="4"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp"/>
+            <RadioButton android:id="@+id/congestion_5" android:text="5"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <!-- Question 7 -->
+        <TextView
+            android:text="7. Is the pain or discomfort intermittent (comes and goes)?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <RadioGroup
+            android:id="@+id/radio_fluctuating"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/fluctuating_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/fluctuating_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+        <!-- Question 8 -->
+        <TextView
+            android:text="8. Are you currently experiencing a cough?"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+        <RadioGroup
+            android:id="@+id/radio_cough_yesno"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/cough_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/cough_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/transparent" />
+
+        <!-- Submit Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Submit"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:background="@drawable/shape_teal_card"
+            android:layout_marginBottom="48dp"
+            android:layout_marginHorizontal="24dp" />
+
+
+    </LinearLayout>
+</ScrollView>

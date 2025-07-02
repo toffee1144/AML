@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".homepage.report.ReportFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:background="@color/teal">
+
+        <ImageView
+            android:id="@+id/imgBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:src="@drawable/ic_back"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- 🧠 Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:backgroundTint="#FFFF00"
+            android:clipToOutline="true"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Checkup Report"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monday, 26 Juli 2025"
+                    android:textSize="14sp"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/tabResult"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:background="@drawable/shape_white_cu"
+                android:layout_marginBottom="-1dp">
+
+                <TextView
+                    android:id="@+id/tvTabResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:text="Result"
+                    android:layout_gravity="center"
+                    android:textColor="@color/teal"
+                    android:textSize="24sp"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/tabChecklist"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:background="@drawable/shape_orange_cu"
+                android:layout_marginLeft="12dp"
+                android:layout_marginBottom="-1dp">
+
+                <TextView
+                    android:id="@+id/tvTabChecklist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:text="Checklist"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"/>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/reportContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

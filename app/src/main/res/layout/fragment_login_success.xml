@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red43">
+
+    <FrameLayout
+        android:id="@+id/flChange"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top" >
+
+        <ImageView
+            android:id="@+id/ivChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_failed"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"/>
+    </FrameLayout>
+
+    <!-- Bottom Card Section -->
+    <FrameLayout
+        android:id="@+id/flChange2"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_red_card_43">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/shape_sign_white"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:padding="24dp" >
+
+            <TextView
+                android:id="@+id/tvWelcome2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Login Failed"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_failkey" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNavigation"
+                android:layout_width="240dp"
+                android:layout_height="48dp"
+                android:text="Back to Login"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
+                android:background="@drawable/shape_red_card"
+                android:layout_marginBottom="12dp"
+                android:layout_marginHorizontal="24dp" />
+
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,268 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cyan">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_bblue_card">
+
+            <!-- Working Card Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/shape_sign_white"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="48dp"
+                android:padding="24dp">
+
+                <!-- Welcome Back -->
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center"
+                    android:text="Welcome Back" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Enter your detail to login into your account!" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Full Name -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Full Name" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:background="@drawable/shape_hollow">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editTextFullName"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:paddingStart="8dp"
+                                android:hint="Your Full Name"
+                                android:textColorHint="#AAA"
+                                android:inputType="textPersonName"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <!-- Email -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Email" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:background="@drawable/shape_hollow">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editTextEmail"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:paddingStart="8dp"
+                                android:hint="Your Email"
+                                android:textColorHint="#AAA"
+                                android:inputType="textEmailAddress"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <!-- Password -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Password" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:background="@drawable/shape_hollow">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editTextPassword"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:paddingStart="8dp"
+                                android:hint="Your Password"
+                                android:textColorHint="#AAA"
+                                android:inputType="textPassword"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <!-- Confirm Password -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Confirm Password" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:background="@drawable/shape_hollow">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/editTextConfirmPassword"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:paddingStart="8dp"
+                                android:hint="Re-enter Password"
+                                android:textColorHint="#AAA"
+                                android:inputType="textPassword"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Your password must contain:" />
+
+                <!-- At least 8 characters -->
+                <CheckBox
+                    android:id="@+id/checkBoxMinLength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:button="@drawable/shape_login_checkbox_selector"
+                    android:text="At least 8 characters"
+                    android:textSize="14sp"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:layout_gravity="start"
+                    android:textColor="@color/black"
+                    android:paddingStart="0dp"
+                    android:drawablePadding="6dp"
+                    android:layout_marginBottom="2dp" />
+
+                <!-- At least one uppercase letter -->
+                <CheckBox
+                    android:id="@+id/checkBoxUppercase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:button="@drawable/shape_login_checkbox_selector"
+                    android:text="At least one uppercase letter"
+                    android:textSize="14sp"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:layout_gravity="start"
+                    android:paddingStart="0dp"
+                    android:drawablePadding="6dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="2dp" />
+
+                <!-- At least one number -->
+                <CheckBox
+                    android:id="@+id/checkBoxNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:button="@drawable/shape_login_checkbox_selector"
+                    android:text="At least one number"
+                    android:textSize="14sp"
+                    android:enabled="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:layout_gravity="start"
+                    android:paddingStart="0dp"
+                    android:drawablePadding="6dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="2dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <android.widget.Button
+                    android:id="@+id/Btn_Register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="40dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shape_teal_bg"
+                    android:text="Register"
+                    android:textSize="26sp"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:textColor="@color/white"
+                    android:elevation="0dp"
+                    android:stateListAnimator="@null" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>
+
+

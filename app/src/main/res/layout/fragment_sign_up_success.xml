@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue43">
+
+    <FrameLayout
+        android:id="@+id/flChange"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top" >
+
+        <ImageView
+            android:id="@+id/ivChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_success"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"/>
+    </FrameLayout>
+
+    <!-- Bottom Card Section -->
+    <FrameLayout
+        android:id="@+id/flChange2"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_bblue_card_43">
+
+        <LinearLayout
+            android:id="@+id/layout_success"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/shape_sign_white"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:padding="24dp" >
+
+            <TextView
+                android:id="@+id/tvWelcome2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Sign Up Completed"
+                android:textAlignment="center"
+                android:textColor="@color/cyan"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_signup" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSubmit"
+                android:layout_width="240dp"
+                android:layout_height="48dp"
+                android:text="Login"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
+                android:background="@drawable/shape_teal_card"
+                android:layout_marginBottom="12dp"
+                android:layout_marginHorizontal="24dp" />
+
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

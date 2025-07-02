@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loginRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cyan">
+
+    <!-- Top Image -->
+    <ImageView
+        android:id="@+id/imageViewTop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_signin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/formCard"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintWidth_percent="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Card Layout -->
+    <LinearLayout
+        android:id="@+id/formCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@drawable/shape_sign_white"
+        android:padding="24dp"
+        app:layout_constraintTop_toBottomOf="@id/imageViewTop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <!-- Welcome Back -->
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Back"
+            android:textColor="#25BEBE"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start a better experience by logging\ninto your account"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Email Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_hollow"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_mailfield" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Enter Your Email"
+                android:background="@android:color/transparent"
+                android:paddingStart="12dp"
+                android:textColorHint="#999999"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+
+        <!-- Password Field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_hollow"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_lockfield" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Enter Your Password"
+                android:background="@android:color/transparent"
+                android:paddingStart="12dp"
+                android:textColorHint="#999999"
+                android:textColor="@color/black"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <!-- Forgot Password -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="#FF0000"
+            android:textSize="14sp"
+            android:gravity="end"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Login Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSubmit"
+            android:layout_width="240dp"
+            android:layout_height="48dp"
+            android:text="Login"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:background="@drawable/shape_teal_card"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Create Account -->
+        <TextView
+            android:id="@+id/tvCreateAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don’t have an account? Create Account"
+            android:textSize="14sp"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Guest Login -->
+        <TextView
+            android:id="@+id/tvGuest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Or Login as guest"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

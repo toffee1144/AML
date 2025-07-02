@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".homepage.checkup.PIFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Personal Identity"
+            android:textColor="@color/teal"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Report Name"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"/>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_hollow">
+
+            <EditText
+                android:id="@+id/evReportName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:paddingStart="8dp"
+                android:hint="Enter your report name"
+                android:inputType="text"
+                android:textColor="#000"
+                android:textColorHint="#AAA" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_hollow">
+
+            <EditText
+                android:id="@+id/editTextAge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:paddingStart="8dp"
+                android:hint="Enter your age"
+                android:inputType="number"
+                android:textColor="#000"
+                android:textColorHint="#AAA" />
+        </FrameLayout>
+
+        <!-- Sex -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sex"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_hollow">
+
+            <Spinner
+                android:id="@+id/spinnerSex"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="8dp"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:popupBackground="#FFF"
+                android:gravity="center_vertical" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Have you ever consulted a doctor before?"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_hollow">
+
+            <Spinner
+                android:id="@+id/spinnerCheckup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="8dp"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:popupBackground="#FFF"
+                android:gravity="center_vertical" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name of the Doctor and Hospital?"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_hollow">
+
+            <EditText
+                android:id="@+id/editTextDoctorHospital"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:paddingStart="8dp"
+                android:hint="Enter your name of doctor and hospital"
+                android:inputType="number"
+                android:textColor="#000"
+                android:textColorHint="#AAA" />
+        </FrameLayout>
+
+        <!-- Family History -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Family History or Self Allergies?"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_hollow"
+            android:minHeight="42dp">
+
+            <EditText
+                android:id="@+id/editTextFamilyHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="10dp"
+                android:hint="Enter details"
+                android:inputType="textMultiLine"
+                android:minLines="1"
+                android:maxLines="5"
+                android:gravity="top|start"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textColorHint="#AAA" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonNext"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Next"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:background="@drawable/shape_teal_card"
+            android:layout_marginBottom="48dp"
+            android:layout_marginHorizontal="24dp" />
+
+
+    </LinearLayout>
+
+
+
+
+</FrameLayout>

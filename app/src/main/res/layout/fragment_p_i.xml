@@ -138,7 +138,7 @@
                 android:background="@android:color/transparent"
                 android:paddingStart="8dp"
                 android:hint="Enter your name of doctor and hospital"
-                android:inputType="number"
+                android:inputType="text"
                 android:textColor="#000"
                 android:textColorHint="#AAA" />
         </FrameLayout>

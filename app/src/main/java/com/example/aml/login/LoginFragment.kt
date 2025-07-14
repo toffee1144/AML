@@ -55,7 +55,19 @@ class LoginFragment : Fragment() {
         binding.tvGuest.setOnClickListener {
             val guestId = DeviceIdManager.getDeviceId(requireContext())
             SessionManager.save(requireContext(), guestId, guestId, "Guest")
-            goToHomepage()
+
+            // Register guest on backend
+            ApiClient.apiService.guestUser(mapOf("userId" to guestId))
+                .enqueue(object : Callback<Void> {
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        goToHomepage()
+                    }
+
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        Toast.makeText(requireContext(), "Guest registration failed", Toast.LENGTH_SHORT).show()
+                        goToHomepage() // Optional: still allow login even if API fails
+                    }
+                })
         }
 
         setupCreateAccountLink()

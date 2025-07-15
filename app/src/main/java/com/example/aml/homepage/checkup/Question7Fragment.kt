@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.aml.R
@@ -26,8 +27,12 @@ class Question7Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val readOnly = arguments?.getBoolean("readOnly", false) ?: false
 
-        // Restore teks jika sudah pernah diisi
-        binding.inputText.setText(sharedViewModel.otherSymptoms ?: "")
+        val text = sharedViewModel.otherSymptoms.value ?: ""
+        binding.inputText.setText(text)
+
+
+
+
 
         // Mode readOnly
         if (readOnly) {

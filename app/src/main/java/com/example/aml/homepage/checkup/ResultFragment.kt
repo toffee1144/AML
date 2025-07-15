@@ -1,6 +1,7 @@
 package com.example.aml.homepage.checkup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,17 +27,9 @@ class ResultFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_result, container, false)
 
-        if (!isDataSent) {
-            sendFormData()
-            isDataSent = true
-        }
-
         val buttonNext = view.findViewById<Button>(R.id.buttonNext)
         buttonNext.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.homepageContainer, HomepageFragment())
-                .addToBackStack(null)
-                .commit()
+            sendFormData()
         }
 
         return view
@@ -45,7 +38,6 @@ class ResultFragment : Fragment() {
     private fun sendFormData() {
         val formData = formViewModel.toFormData(requireContext())
 
-        // Validasi tambahan jika diperlukan:
         if (formData.reportName.isBlank()) {
             Toast.makeText(requireContext(), "Data tidak lengkap. Harap isi semua pertanyaan.", Toast.LENGTH_SHORT).show()
             return
@@ -55,6 +47,10 @@ class ResultFragment : Fragment() {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Toast.makeText(requireContext(), "Form berhasil dikirim!", Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.homepageContainer, HomepageFragment())
+                        .addToBackStack(null)
+                        .commit()
                 } else {
                     Toast.makeText(requireContext(), "Gagal submit: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
@@ -65,4 +61,5 @@ class ResultFragment : Fragment() {
             }
         })
     }
+
 }

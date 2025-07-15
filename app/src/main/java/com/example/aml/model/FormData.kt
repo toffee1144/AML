@@ -8,19 +8,21 @@ data class FormData(
     val sex: String,
     val familyHistory: String,
 
-    // Sinusitis Likert-based symptoms
-    val symptomDuration: Int,     // Q1: >10 days
-    val nasalDischarge: Int,      // Q2: purulent nasal discharge
-    val anosmia: Int,             // Q3: loss of smell
-    val facialPain: Int,          // Q4: facial pain/pressure
-    val fever: Int,               // Q5: fever
-    val congestion: Int,          // Q6: nasal congestion
+    // Sinusitis Likert-based symptoms (1-5)
+    val symptomDuration: Int,
+    val nasalDischarge: Int,
+    val anosmia: Int,
+    val facialPain: Int,
+    val fever: Int,
+    val congestion: Int,
 
     // Yes/No symptoms
-    val painFluctuate: String,    // Q7: Yes / No
-    val coughYesNo: String,      // Q8: Yes / No
+    val painFluctuate: String,
+    val coughYesNo: String,
 
+    // Tambahan dari ViewModel
+    val otherSymptoms: String?,    // nullable karena optional
+    val ingusPhotoUri: String?,    // Uri disimpan sebagai String path
     val checkupStatus: String,
     val doctorHospital: String
-
 )

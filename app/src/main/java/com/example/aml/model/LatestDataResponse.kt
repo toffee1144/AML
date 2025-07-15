@@ -2,6 +2,7 @@ package com.example.aml.model
 
 data class LatestDataResponse(
     val percentage: Int,
-    val level: String,
-    val note: String
+    val recommendedAction: String,
+    val report: String,
+    val userId: String
 )

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textColor">#222222</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

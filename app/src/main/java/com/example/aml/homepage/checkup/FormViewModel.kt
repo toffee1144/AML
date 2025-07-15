@@ -1,6 +1,7 @@
 package com.example.aml.homepage.checkup
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,52 +14,124 @@ class FormViewModel : ViewModel() {
 
     private val _reportUid = MutableLiveData(UUID.randomUUID().toString())
     val reportUid: LiveData<String> get() = _reportUid
+    fun setReportUid(value: String) {
+        _reportUid.value = value
+    }
+    fun getReportUid(): String? = _reportUid.value
 
     private val _reportName = MutableLiveData<String>()
     val reportName: LiveData<String> get() = _reportName
+    fun setReportName(value: String) {
+        _reportName.value = value
+    }
+    fun getReportName(): String? = _reportName.value
 
     private val _age = MutableLiveData<Int>()
     val age: LiveData<Int> get() = _age
+    fun setAge(value: Int) {
+        _age.value = value
+    }
+    fun getAge(): Int? = _age.value
 
     private val _sex = MutableLiveData<String>()
     val sex: LiveData<String> get() = _sex
+    fun setSex(value: String) {
+        _sex.value = value
+    }
+    fun getSex(): String? = _sex.value
 
     private val _checkupStatus = MutableLiveData<String>()
     val checkupStatus: LiveData<String> get() = _checkupStatus
+    fun setCheckupStatus(value: String) {
+        _checkupStatus.value = value
+    }
+    fun getCheckupStatus(): String? = _checkupStatus.value
 
     private val _doctorHospital = MutableLiveData<String>()
     val doctorHospital: LiveData<String> get() = _doctorHospital
+    fun setDoctorHospital(value: String) {
+        _doctorHospital.value = value
+    }
+    fun getDoctorHospital(): String? = _doctorHospital.value
 
     private val _familyHistory = MutableLiveData<String>()
     val familyHistory: LiveData<String> get() = _familyHistory
+    fun setFamilyHistory(value: String) {
+        _familyHistory.value = value
+    }
+    fun getFamilyHistory(): String? = _familyHistory.value
 
-    // Likert-scale values (1–5)
     private val _symptomDuration = MutableLiveData(1)
     val symptomDuration: LiveData<Int> get() = _symptomDuration
+    fun setSymptomDuration(value: Int) {
+        _symptomDuration.value = value
+    }
+    fun getSymptomDuration(): Int? = _symptomDuration.value
 
     private val _nasalDischarge = MutableLiveData(1)
     val nasalDischarge: LiveData<Int> get() = _nasalDischarge
+    fun setNasalDischarge(value: Int) {
+        _nasalDischarge.value = value
+    }
+    fun getNasalDischarge(): Int? = _nasalDischarge.value
 
     private val _anosmia = MutableLiveData(1)
     val anosmia: LiveData<Int> get() = _anosmia
+    fun setAnosmia(value: Int) {
+        _anosmia.value = value
+    }
+    fun getAnosmia(): Int? = _anosmia.value
 
     private val _facialPain = MutableLiveData(1)
     val facialPain: LiveData<Int> get() = _facialPain
+    fun setFacialPain(value: Int) {
+        _facialPain.value = value
+    }
+    fun getFacialPain(): Int? = _facialPain.value
 
     private val _fever = MutableLiveData(1)
     val fever: LiveData<Int> get() = _fever
+    fun setFever(value: Int) {
+        _fever.value = value
+    }
+    fun getFever(): Int? = _fever.value
 
     private val _congestion = MutableLiveData(1)
     val congestion: LiveData<Int> get() = _congestion
+    fun setCongestion(value: Int) {
+        _congestion.value = value
+    }
+    fun getCongestion(): Int? = _congestion.value
 
-    // Yes/No questions
     private val _painFluctuate = MutableLiveData("No")
     val painFluctuate: LiveData<String> get() = _painFluctuate
+    fun setPainFluctuate(value: String) {
+        _painFluctuate.value = value
+    }
+    fun getPainFluctuate(): String? = _painFluctuate.value
 
     private val _coughYesNo = MutableLiveData("No")
     val coughYesNo: LiveData<String> get() = _coughYesNo
+    fun setCoughYesNo(value: String) {
+        _coughYesNo.value = value
+    }
+    fun getCoughYesNo(): String? = _coughYesNo.value
 
+    private val _otherSymptoms = MutableLiveData<String>()
+    val otherSymptoms: LiveData<String> get() = _otherSymptoms
+    fun setOtherSymptoms(value: String) {
+        _otherSymptoms.value = value
+    }
+    fun getOtherSymptoms(): String? = _otherSymptoms.value
 
+    private val _ingusPhotoUri = MutableLiveData<Uri?>()
+    val ingusPhotoUri: LiveData<Uri?> get() = _ingusPhotoUri
+    fun setIngusPhotoUri(uri: Uri?) {
+        _ingusPhotoUri.value = uri
+    }
+    fun getIngusPhotoUri(): Uri? = _ingusPhotoUri.value
+
+    // Set all personal info at once
     fun setPersonalInfo(
         reportName: String,
         age: Int,
@@ -67,14 +140,15 @@ class FormViewModel : ViewModel() {
         doctorHospitalName: String,
         history: String
     ) {
-        _reportName.value = reportName
-        _age.value = age
-        _sex.value = sex
-        _checkupStatus.value = checkup
-        _doctorHospital.value = doctorHospitalName
-        _familyHistory.value = history
+        setReportName(reportName)
+        setAge(age)
+        setSex(sex)
+        setCheckupStatus(checkup)
+        setDoctorHospital(doctorHospitalName)
+        setFamilyHistory(history)
     }
 
+    // Set all screening info at once
     fun setScreeningInfo(
         symptomDuration: Int,
         nasalDischarge: Int,
@@ -83,66 +157,76 @@ class FormViewModel : ViewModel() {
         fever: Int,
         congestion: Int
     ) {
-        _symptomDuration.value = symptomDuration
-        _nasalDischarge.value = nasalDischarge
-        _anosmia.value = anosmia
-        _facialPain.value = facialPain
-        _fever.value = fever
-        _congestion.value = congestion
+        setSymptomDuration(symptomDuration)
+        setNasalDischarge(nasalDischarge)
+        setAnosmia(anosmia)
+        setFacialPain(facialPain)
+        setFever(fever)
+        setCongestion(congestion)
     }
 
+    // Set extra symptoms at once
     fun setExtraSymptoms(painFluctuate: String, coughYesNo: String) {
-        _painFluctuate.value = painFluctuate
-        _coughYesNo.value = coughYesNo
+        setPainFluctuate(painFluctuate)
+        setCoughYesNo(coughYesNo)
     }
 
+    // Convert ViewModel to FormData model
     fun toFormData(context: Context): FormData {
         val storedId = SessionManager.getUserId(context)
-        val userId = if (storedId.isBlank()) {
+        val userId = if (storedId.isNullOrBlank()) {
             DeviceIdManager.getDeviceId(context)
         } else {
             storedId
         }
 
         return FormData(
+            reportUid = getReportUid() ?: UUID.randomUUID().toString(),
             userId = userId,
-            reportUid = _reportUid.value ?: UUID.randomUUID().toString(),
-            reportName = _reportName.value.orEmpty(),
-            age = _age.value ?: 0,
-            sex = _sex.value.orEmpty(),
-            checkupStatus = _checkupStatus.value.orEmpty(),
-            doctorHospital = _doctorHospital.value.orEmpty(),
-            familyHistory = _familyHistory.value.orEmpty(),
+            reportName = getReportName().orEmpty(),
+            age = getAge() ?: 0,
+            sex = getSex().orEmpty(),
+            familyHistory = getFamilyHistory().orEmpty(),
 
-            symptomDuration = _symptomDuration.value ?: 1,
-            nasalDischarge = _nasalDischarge.value ?: 1,
-            anosmia = _anosmia.value ?: 1,
-            facialPain = _facialPain.value ?: 1,
-            fever = _fever.value ?: 1,
-            congestion = _congestion.value ?: 1,
+            symptomDuration = getSymptomDuration() ?: 1,
+            nasalDischarge = getNasalDischarge() ?: 1,
+            anosmia = getAnosmia() ?: 1,
+            facialPain = getFacialPain() ?: 1,
+            fever = getFever() ?: 1,
+            congestion = getCongestion() ?: 1,
 
-            painFluctuate = _painFluctuate.value.orEmpty(),
-            coughYesNo = _coughYesNo.value.orEmpty()
+            painFluctuate = getPainFluctuate().orEmpty(),
+            coughYesNo = getCoughYesNo().orEmpty(),
+
+            otherSymptoms = getOtherSymptoms(),
+            ingusPhotoUri = getIngusPhotoUri()?.toString(),
+
+            checkupStatus = getCheckupStatus().orEmpty(),
+            doctorHospital = getDoctorHospital().orEmpty()
         )
     }
 
+    // Set ViewModel data from FormData model
     fun setFromFormData(data: FormData) {
-        _reportUid.value = data.reportUid
-        _reportName.value = data.reportName
-        _age.value = data.age
-        _sex.value = data.sex
-        _checkupStatus.value = data.checkupStatus
-        _doctorHospital.value = data.doctorHospital
-        _familyHistory.value = data.familyHistory
+        setReportUid(data.reportUid)
+        setReportName(data.reportName)
+        setAge(data.age)
+        setSex(data.sex)
+        setCheckupStatus(data.checkupStatus)
+        setDoctorHospital(data.doctorHospital)
+        setFamilyHistory(data.familyHistory)
 
-        _symptomDuration.value = data.symptomDuration
-        _nasalDischarge.value = data.nasalDischarge
-        _anosmia.value = data.anosmia
-        _facialPain.value = data.facialPain
-        _fever.value = data.fever
-        _congestion.value = data.congestion
+        setSymptomDuration(data.symptomDuration)
+        setNasalDischarge(data.nasalDischarge)
+        setAnosmia(data.anosmia)
+        setFacialPain(data.facialPain)
+        setFever(data.fever)
+        setCongestion(data.congestion)
 
-        _painFluctuate.value = data.painFluctuate
-        _coughYesNo.value = data.coughYesNo
+        setPainFluctuate(data.painFluctuate)
+        setCoughYesNo(data.coughYesNo)
+
+        setOtherSymptoms(data.otherSymptoms ?: "")
+        setIngusPhotoUri(data.ingusPhotoUri?.let { Uri.parse(it) })
     }
 }

@@ -1,26 +1,49 @@
 package com.example.aml.model
 
+import com.google.gson.annotations.SerializedName
+
 data class FormData(
+    @SerializedName("report_uid")
     val reportUid: String,
+
+    @SerializedName("user_id")
     val userId: String,
+
+    @SerializedName("report_name")
     val reportName: String,
+
     val age: Int,
     val sex: String,
+
+    @SerializedName("family_history")
     val familyHistory: String,
 
-    // Sinusitis Likert-based symptoms
-    val symptomDuration: Int,     // Q1: >10 days
-    val nasalDischarge: Int,      // Q2: purulent nasal discharge
-    val anosmia: Int,             // Q3: loss of smell
-    val facialPain: Int,          // Q4: facial pain/pressure
-    val fever: Int,               // Q5: fever
-    val congestion: Int,          // Q6: nasal congestion
+    @SerializedName("symptom_duration")
+    val symptomDuration: Int,
 
-    // Yes/No symptoms
-    val painFluctuate: String,    // Q7: Yes / No
-    val coughYesNo: String,      // Q8: Yes / No
+    @SerializedName("nasal_discharge")
+    val nasalDischarge: Int,
 
+    val anosmia: Int,
+
+    @SerializedName("facial_pain")
+    val facialPain: Int,
+
+    val fever: Int,
+    val congestion: Int,
+
+    @SerializedName("pain_fluctuate")
+    val painFluctuate: String,
+
+    @SerializedName("cough_yes_no")
+    val coughYesNo: String,
+
+    val otherSymptoms: String?,    // nullable karena optional
+    val ingusPhotoUri: String?,    // Uri disimpan sebagai String path
+
+    @SerializedName("checkup_status")
     val checkupStatus: String,
-    val doctorHospital: String
 
+    @SerializedName("doctor_hospital")
+    val doctorHospital: String
 )

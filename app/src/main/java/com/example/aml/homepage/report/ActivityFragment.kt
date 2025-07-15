@@ -14,6 +14,7 @@ import com.example.aml.R
 import com.example.aml.model.ReportItem
 import com.example.aml.network.ApiClient
 import com.example.aml.utility.DeviceIdManager
+import com.example.aml.utility.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,7 +63,7 @@ class ActivityFragment : Fragment() {
     }
 
     private fun fetchReportsFromApi() {
-        val userId = DeviceIdManager.getDeviceId(requireContext())
+        val userId = SessionManager.getUserId(requireContext())  // Ganti dari DeviceIdManager ke SessionManager
 
         ApiClient.apiService.getReports(userId).enqueue(object : Callback<List<ReportItem>> {
             override fun onResponse(
@@ -84,4 +85,5 @@ class ActivityFragment : Fragment() {
             }
         })
     }
+
 }

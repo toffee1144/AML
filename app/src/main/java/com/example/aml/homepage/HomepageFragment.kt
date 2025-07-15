@@ -1,6 +1,8 @@
 package com.example.aml.homepage
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +10,12 @@ import androidx.fragment.app.Fragment
 import com.example.aml.databinding.FragmentHomepageBinding
 import com.example.aml.R
 import com.example.aml.homepage.checkup.CheckupFragment
-import com.example.aml.homepage.report.ActivityAdapter
 import com.example.aml.homepage.report.ActivityFragment
 import com.example.aml.model.LatestDataResponse
 import com.example.aml.network.ApiClient
 import com.example.aml.utility.DeviceIdManager
-import androidx.core.content.edit
+import com.example.aml.utility.SessionManager
+import com.example.aml.profile.ProfilIdentityActivity
 
 class HomepageFragment : Fragment() {
     private var _binding: FragmentHomepageBinding? = null
@@ -29,8 +31,11 @@ class HomepageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        userId = DeviceIdManager.getDeviceId(requireContext())
+        userId = SessionManager.getUserId(requireContext()) // Pakai userId dari session manager
+        Log.d("HomepageFragment", "UserId: $userId")  // Cek userId di log
         registerUser(userId)
+
+        updateUsername()
 
         if (isFirstTime()) {
             binding.tvPercentage.text = "No Data Found!"
@@ -41,8 +46,19 @@ class HomepageFragment : Fragment() {
             fetchLatestDataFromApi()
         }
 
+        binding.imgProfileIcon.setOnClickListener {
+            val intent = Intent(requireContext(), ProfilIdentityActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.layoutCheckup.setOnClickListener {
             parentFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left,
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
                 .replace(R.id.homepageContainer, CheckupFragment())
                 .addToBackStack(null)
                 .commit()
@@ -54,18 +70,28 @@ class HomepageFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
 
+    private fun updateUsername() {
+        val username = SessionManager.getUsername(requireContext()) ?: "Guest"
+        binding.tvUsername.text = username
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateUsername()
     }
 
     private fun registerUser(userId: String) {
         val body = mapOf("userId" to userId)
         ApiClient.apiService.guestUser(body).enqueue(object : retrofit2.Callback<Void> {
             override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
-                // Optional: Log or show something if needed
+                // Optional: log
+                Log.d("HomepageFragment", "guestUser registered: ${response.isSuccessful}")
             }
 
             override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
-                // Optional: Handle error
+                Log.e("HomepageFragment", "guestUser failed: ${t.message}")
             }
         })
     }
@@ -77,40 +103,51 @@ class HomepageFragment : Fragment() {
 
     private fun markFirstTimeDone() {
         val prefs = requireContext().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
-        prefs.edit() { putBoolean("is_first_time", false) }
+        prefs.edit().putBoolean("is_first_time", false).apply()
     }
 
     private fun fetchLatestDataFromApi() {
+        Log.d("HomepageFragment", "Fetching latest data for userId: $userId")
         ApiClient.apiService.getLatestData(userId).enqueue(object : retrofit2.Callback<LatestDataResponse> {
             override fun onResponse(call: retrofit2.Call<LatestDataResponse>, response: retrofit2.Response<LatestDataResponse>) {
                 if (!isAdded || _binding == null) return
 
-                val data = response.body()
-                if (response.isSuccessful && data != null) {
-                    binding.tvPercentage.text = "${data.percentage}%"
-                    binding.tvLevel.text = when (data.percentage) {
-                        in 0..30 -> "Low Risk"
-                        in 31..70 -> "Medium Risk"
-                        else -> "High Risk"
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        Log.d("HomepageFragment", "Data received: $data")
+
+                        binding.tvPercentage.text = "${data.percentage}%"
+                        binding.tvLevel.text = when (data.percentage) {
+                            in 0..30 -> "Low Risk"
+                            in 31..70 -> "Medium Risk"
+                            else -> "High Risk"
+                        }
+                        binding.tvNote.text = data.recommendedAction
+                    } else {
+                        Log.e("HomepageFragment", "Response body null")
+                        showNoDataFound()
                     }
-                    binding.tvNote.text = "Please seek a doctor for\ndetailed information"
                 } else {
-                    binding.tvPercentage.text = ""
-                    binding.tvLevel.text = "No Data Found!"
-                    binding.tvNote.text = ""
+                    Log.e("HomepageFragment", "Response failed: ${response.code()} - ${response.message()}")
+                    showNoDataFound()
                 }
             }
 
             override fun onFailure(call: retrofit2.Call<LatestDataResponse>, t: Throwable) {
                 if (!isAdded || _binding == null) return
 
-                binding.tvPercentage.text = "No Data Found!"
-                binding.tvLevel.text = ""
-                binding.tvNote.text = ""
+                Log.e("HomepageFragment", "API call failed: ${t.message}")
+                showNoDataFound()
             }
         })
     }
 
+    private fun showNoDataFound() {
+        binding.tvPercentage.text = ""
+        binding.tvLevel.text = "No Data Found!"
+        binding.tvNote.text = ""
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

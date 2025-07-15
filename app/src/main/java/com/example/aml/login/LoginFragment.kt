@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
 
         binding.tvGuest.setOnClickListener {
             val guestId = DeviceIdManager.getDeviceId(requireContext())
-            SessionManager.save(requireContext(), guestId, guestId, "Guest")
+            SessionManager.save(requireContext(), guestId, guestId, "Guest", "guest@example.com")
 
             // Register guest on backend
             ApiClient.apiService.guestUser(mapOf("userId" to guestId))
@@ -106,7 +106,8 @@ class LoginFragment : Fragment() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful && response.body() != null) {
                     val loginResponse = response.body()!!
-                    saveSession(loginResponse.token, loginResponse.userId, loginResponse.username)
+                    saveSession(loginResponse.token, loginResponse.userId, loginResponse.username, email)
+
                     goToHomepage()
                 } else {
                     Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show()
@@ -119,9 +120,11 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun saveSession(token: String, userId: String, username: String) {
-        SessionManager.save(requireContext(), token, userId, username)
+    private fun saveSession(token: String, userId: String, username: String, email: String) {
+        SessionManager.save(requireContext(), token, userId, username, email)
     }
+
+
 
     private fun checkIfLoggedIn() {
         val token = SessionManager.getToken(requireContext())

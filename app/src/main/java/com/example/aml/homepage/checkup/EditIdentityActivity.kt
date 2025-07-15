@@ -50,8 +50,8 @@ class EditIdentityActivity : AppCompatActivity() {
             // TODO: Add real API call to update identity
 
             // Simulate update success
-            SessionManager.saveUsername(this, fullName)
-            SessionManager.saveEmail(this, email)
+//            SessionManager.saveUsername(this, fullName)
+//            SessionManager.saveEmail(this, email)
 
             showSuccessOverlay()
         }

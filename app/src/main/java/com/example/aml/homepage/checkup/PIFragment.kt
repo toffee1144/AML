@@ -29,17 +29,23 @@ class PIFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupDropdowns()
 
         val readOnly = arguments?.getBoolean("readOnly", false) ?: false
 
         if (readOnly) {
-            // Pre-fill from ViewModel
-            binding.evReportName.setText(sharedViewModel.reportName.value)
-            binding.editTextAge.setText(sharedViewModel.age.value?.toString())
-            binding.editTextFamilyHistory.setText(sharedViewModel.familyHistory.value)
+            // Baca data dari arguments, bukan dari ViewModel
+            val reportName = arguments?.getString("reportName") ?: ""
+            val age = arguments?.getInt("age", 0) ?: 0
+            val familyHistory = arguments?.getString("familyHistory") ?: ""
+            val sex = arguments?.getString("sex") ?: ""
 
-            val sexIndex = when (sharedViewModel.sex.value) {
+            binding.evReportName.setText(reportName)
+            binding.editTextAge.setText(if (age == 0) "" else age.toString())
+            binding.editTextFamilyHistory.setText(familyHistory)
+
+            val sexIndex = when (sex) {
                 "Male" -> 1
                 "Female" -> 2
                 "Other" -> 3
@@ -47,18 +53,34 @@ class PIFragment : Fragment() {
             }
             binding.spinnerSex.setSelection(sexIndex)
 
-            // Disable fields
+            // Kalau perlu set juga spinnerCheckup dan doctorHospital
+            val checkupStatus = arguments?.getString("checkupStatus") ?: ""
+            val doctorHospital = arguments?.getString("doctorHospital") ?: ""
+
+            val checkupOptions = listOf("Select an option", "Yes", "No")
+            val checkupIndex = checkupOptions.indexOf(checkupStatus)
+            if (checkupIndex >= 0) {
+                binding.spinnerCheckup.setSelection(checkupIndex)
+            }
+            binding.editTextDoctorHospital.setText(doctorHospital)
+
+            // Disable semua input agar readOnly
             binding.evReportName.isEnabled = false
             binding.editTextAge.isEnabled = false
             binding.editTextFamilyHistory.isEnabled = false
             binding.spinnerSex.isEnabled = false
+            binding.spinnerCheckup.isEnabled = false
+            binding.editTextDoctorHospital.isEnabled = false
             binding.buttonNext.visibility = View.GONE
+        } else {
+            // Kalau bukan readOnly, bisa setup biasa atau kosong
         }
 
         binding.buttonNext.setOnClickListener {
             validateAndGoNext()
         }
     }
+
 
 
     private fun setupDropdowns() {

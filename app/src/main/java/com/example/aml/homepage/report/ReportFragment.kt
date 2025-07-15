@@ -1,6 +1,7 @@
 package com.example.aml.homepage.report
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class ReportFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             reportUid = it.getString(ARG_REPORT_UID)
+            Log.d("ReportFragment", "Received reportUid = $reportUid")
         }
     }
 
@@ -56,8 +58,10 @@ class ReportFragment : Fragment() {
             loadChecklistFragment()
         }
 
-        if (reportUid != null) {
-            fetchReportData(reportUid!!)
+        reportUid?.let { uid ->
+            fetchReportData(uid)
+        } ?: run {
+            Log.e("ReportFragment", "reportUid is null! Cannot fetch data.")
         }
     }
 
@@ -83,25 +87,30 @@ class ReportFragment : Fragment() {
     }
 
     private fun fetchReportData(uid: String) {
+        Log.d("ReportFragment", "Fetching report data for UID: $uid")
         val apiService = ApiClient.apiService
         apiService.getReportByUid(uid).enqueue(object : Callback<FormData> {
             override fun onResponse(call: Call<FormData>, response: Response<FormData>) {
                 if (response.isSuccessful && response.body() != null) {
+                    Log.d("ReportFragment", "Report data fetched successfully")
                     requireView().findViewById<View>(R.id.tabResult).isEnabled = true
                     requireView().findViewById<View>(R.id.tabChecklist).isEnabled = true
 
                     updateTabs("result")
                     loadResultFragment()
+                } else {
+                    Log.e("ReportFragment", "Failed to fetch report data or data is null")
                 }
             }
 
             override fun onFailure(call: Call<FormData>, t: Throwable) {
-                // Handle failure if needed
+                Log.e("ReportFragment", "API call failed: ${t.localizedMessage}")
             }
         })
     }
 
     private fun loadResultFragment() {
+        Log.d("ReportFragment", "Loading ResultFragment with reportUid: $reportUid")
         val resultFragment = RcFragment.newInstance(reportUid ?: "")
         childFragmentManager.beginTransaction()
             .replace(R.id.reportContainer, resultFragment)
@@ -109,6 +118,7 @@ class ReportFragment : Fragment() {
     }
 
     private fun loadChecklistFragment() {
+        Log.d("ReportFragment", "Loading ChecklistFragment with reportUid: $reportUid")
         val checklistFragment = ChecklistFragment.newInstance(reportUid ?: "")
         childFragmentManager.beginTransaction()
             .replace(R.id.reportContainer, checklistFragment)

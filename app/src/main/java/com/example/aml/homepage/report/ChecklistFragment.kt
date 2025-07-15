@@ -2,13 +2,14 @@ package com.example.aml.homepage.report
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.aml.R
-import com.example.aml.homepage.checkup.PIFragment
 import com.example.aml.homepage.checkup.CUFragment
+import com.example.aml.homepage.checkup.PIFragment
 import com.example.aml.model.FormData
 import com.example.aml.network.ApiClient
 import retrofit2.Call
@@ -26,6 +27,7 @@ class ChecklistFragment : Fragment(R.layout.fragment_checklist) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reportUid = arguments?.getString(ARG_REPORT_UID)
+        Log.d("ChecklistFragment", "[onCreate] Received reportUid: $reportUid")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,41 +37,58 @@ class ChecklistFragment : Fragment(R.layout.fragment_checklist) {
         btnScreening = view.findViewById(R.id.btnScreening)
 
         btnIdentity.setOnClickListener {
+            Log.d("ChecklistFragment", "[btnIdentity] Clicked")
             formData?.let {
+                Log.d("ChecklistFragment", "[btnIdentity] Loading PIFragment with data: $it")
                 loadPIFragment(it)
                 highlightTab(isIdentity = true)
-            }
+            } ?: Log.w("ChecklistFragment", "[btnIdentity] formData is null, cannot load PIFragment")
         }
 
         btnScreening.setOnClickListener {
+            Log.d("ChecklistFragment", "[btnScreening] Clicked")
             formData?.let {
+                Log.d("ChecklistFragment", "[btnScreening] Loading CUFragment with data: $it")
                 loadCUFragment(it)
                 highlightTab(isIdentity = false)
-            }
+            } ?: Log.w("ChecklistFragment", "[btnScreening] formData is null, cannot load CUFragment")
         }
 
-        reportUid?.let { fetchFormData(it) }
+        if (reportUid != null) {
+            Log.d("ChecklistFragment", "[onViewCreated] Starting fetchFormData for UID: $reportUid")
+            fetchFormData(reportUid!!)
+        } else {
+            Log.e("ChecklistFragment", "[onViewCreated] reportUid is null, cannot fetch data")
+        }
     }
 
     private fun fetchFormData(uid: String) {
+        Log.d("ChecklistFragment", "[fetchFormData] Fetching form data for UID: $uid")
         ApiClient.apiService.getReportByUid(uid).enqueue(object : Callback<FormData> {
             override fun onResponse(call: Call<FormData>, response: Response<FormData>) {
+                Log.d("ChecklistFragment", "[fetchFormData.onResponse] response.isSuccessful=${response.isSuccessful}")
                 if (response.isSuccessful) {
                     formData = response.body()
-                    formData?.let {
-                        loadPIFragment(it)
+                    if (formData != null) {
+                        Log.d("ChecklistFragment", "[fetchFormData.onResponse] Data fetched successfully for UID: $uid -> $formData")
+                        loadPIFragment(formData!!)
                         highlightTab(isIdentity = true)
+                    } else {
+                        Log.e("ChecklistFragment", "[fetchFormData.onResponse] Data is null for UID: $uid")
                     }
+                } else {
+                    Log.e("ChecklistFragment", "[fetchFormData.onResponse] Failed to fetch data for UID: $uid, code: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<FormData>, t: Throwable) {
-                // Optionally show an error or log
+                Log.e("ChecklistFragment", "[fetchFormData.onFailure] API call failed: ${t.localizedMessage}")
             }
         })
     }
 
     private fun loadPIFragment(data: FormData) {
+        Log.d("ChecklistFragment", "[loadPIFragment] Preparing PIFragment with data: $data")
         val fragment = PIFragment().apply {
             arguments = Bundle().apply {
                 putBoolean("readOnly", true)
@@ -77,17 +96,19 @@ class ChecklistFragment : Fragment(R.layout.fragment_checklist) {
                 putInt("age", data.age)
                 putString("sex", data.sex)
                 putString("familyHistory", data.familyHistory)
-                putString("checkupStatus", data.checkupStatus) // ✅ Added
-                putString("doctorHospital", data.doctorHospital) // ✅ Added
+                putString("checkupStatus", data.checkupStatus)
+                putString("doctorHospital", data.doctorHospital)
             }
         }
 
         childFragmentManager.beginTransaction()
             .replace(R.id.child_fragment_container, fragment)
             .commit()
+        Log.d("ChecklistFragment", "[loadPIFragment] PIFragment committed")
     }
 
     private fun loadCUFragment(data: FormData) {
+        Log.d("ChecklistFragment", "[loadCUFragment] Preparing CUFragment with data: $data")
         val fragment = CUFragment().apply {
             arguments = Bundle().apply {
                 putBoolean("readOnly", true)
@@ -105,11 +126,14 @@ class ChecklistFragment : Fragment(R.layout.fragment_checklist) {
         childFragmentManager.beginTransaction()
             .replace(R.id.child_fragment_container, fragment)
             .commit()
+        Log.d("ChecklistFragment", "[loadCUFragment] CUFragment committed")
     }
 
     private fun highlightTab(isIdentity: Boolean) {
         val orangeBg = R.drawable.shape_orange_bg
         val whiteColor = ContextCompat.getColor(requireContext(), R.color.white)
+
+        Log.d("ChecklistFragment", "[highlightTab] isIdentity=$isIdentity")
 
         if (isIdentity) {
             btnIdentity.setBackgroundResource(orangeBg)

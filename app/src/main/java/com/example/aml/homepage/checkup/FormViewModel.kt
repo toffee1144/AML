@@ -1,6 +1,7 @@
 package com.example.aml.homepage.checkup
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -145,4 +146,61 @@ class FormViewModel : ViewModel() {
         _painFluctuate.value = data.painFluctuate
         _coughYesNo.value = data.coughYesNo
     }
+
+    fun setSymptomDuration(value: Int) {
+        _symptomDuration.value = value
+    }
+
+    fun getAnosmia(): Int? {
+        return _anosmia.value
+    }
+
+    fun setAnosmia(value: Int) {
+        _anosmia.value = value
+    }
+
+    fun getFacialPain(): Int? {
+        return _facialPain.value
+    }
+
+    fun setFacialPain(value: Int) {
+        _facialPain.value = value
+    }
+
+    fun getFever(): Int? {
+        return _fever.value
+    }
+
+    fun setFever(value: Int) {
+        _fever.value = value
+    }
+
+    fun getCongestion(): Int? {
+        return _congestion.value
+    }
+
+    fun setCongestion(value: Int) {
+        _congestion.value = value
+    }
+
+    private val _ingusPhotoUri = MutableLiveData<Uri>()
+    val ingusPhotoUri: LiveData<Uri> get() = _ingusPhotoUri
+    fun setIngusPhotoUri(uri: Uri) {
+        _ingusPhotoUri.value = uri
+    }
+
+    private val _otherSymptoms = MutableLiveData<String>()
+    val otherSymptoms: String? get() = _otherSymptoms.value
+    fun setOtherSymptoms(value: String) {
+        _otherSymptoms.value = value
+    }
+
+    fun setNasalDischarge(value: Int) {
+        _nasalDischarge.value = value
+    }
+
+    fun getNasalDischarge(): Int? {
+        return _nasalDischarge.value
+    }
+
 }

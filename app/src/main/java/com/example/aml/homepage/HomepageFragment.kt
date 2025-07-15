@@ -1,19 +1,20 @@
 package com.example.aml.homepage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.aml.databinding.FragmentHomepageBinding
 import com.example.aml.R
 import com.example.aml.homepage.checkup.CheckupFragment
-import com.example.aml.homepage.report.ActivityAdapter
 import com.example.aml.homepage.report.ActivityFragment
 import com.example.aml.model.LatestDataResponse
 import com.example.aml.network.ApiClient
 import com.example.aml.utility.DeviceIdManager
-import androidx.core.content.edit
+import com.example.aml.profile.ProfilIdentityActivity
 
 class HomepageFragment : Fragment() {
     private var _binding: FragmentHomepageBinding? = null
@@ -41,8 +42,20 @@ class HomepageFragment : Fragment() {
             fetchLatestDataFromApi()
         }
 
+        // Ganti: langsung buka halaman profil
+        binding.imgProfileIcon.setOnClickListener {
+            val intent = Intent(requireContext(), ProfilIdentityActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.layoutCheckup.setOnClickListener {
             parentFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left,
+                    R.anim.slide_in_right,
+                    R.anim.slide_out_left
+                )
                 .replace(R.id.homepageContainer, CheckupFragment())
                 .addToBackStack(null)
                 .commit()
@@ -54,18 +67,17 @@ class HomepageFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-
     }
 
     private fun registerUser(userId: String) {
         val body = mapOf("userId" to userId)
         ApiClient.apiService.guestUser(body).enqueue(object : retrofit2.Callback<Void> {
             override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
-                // Optional: Log or show something if needed
+                // Optional
             }
 
             override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
-                // Optional: Handle error
+                // Optional
             }
         })
     }
@@ -77,7 +89,7 @@ class HomepageFragment : Fragment() {
 
     private fun markFirstTimeDone() {
         val prefs = requireContext().getSharedPreferences("user_prefs", android.content.Context.MODE_PRIVATE)
-        prefs.edit() { putBoolean("is_first_time", false) }
+        prefs.edit().putBoolean("is_first_time", false).apply()
     }
 
     private fun fetchLatestDataFromApi() {
@@ -110,7 +122,6 @@ class HomepageFragment : Fragment() {
             }
         })
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

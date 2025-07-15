@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homepage_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:background="@color/white"
     tools:context=".homepage.HomepageFragment">
 
+    <!-- Top Header Section -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="310dp"
+        android:id="@+id/header_section"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:background="@drawable/vector__8_"
-        android:layout_marginTop="-5dp">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.38">
 
+        <!-- Welcome & Profile -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,16 +28,14 @@
             android:paddingHorizontal="16dp"
             android:paddingTop="8dp">
 
-            <!-- Left text column -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginVertical="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginVertical="20dp">
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Welcome Back"
@@ -53,8 +56,8 @@
                     android:layout_marginTop="-6dp" />
             </LinearLayout>
 
-            <!-- Profile Image -->
             <ImageView
+                android:id="@+id/imgProfileIcon"
                 android:layout_width="59dp"
                 android:layout_height="59dp"
                 android:layout_gravity="center_vertical"
@@ -62,52 +65,48 @@
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_guest" />
-
         </LinearLayout>
 
         <ImageView
             android:layout_width="220dp"
             android:layout_height="250dp"
-            android:background="@drawable/group__1_"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="-16dp"
-            android:layout_marginEnd="67dp"/>
+            android:layout_marginEnd="67dp"
+            android:background="@drawable/group__1_" />
     </LinearLayout>
 
+    <!-- Middle Content -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/middle_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:paddingHorizontal="24dp">
+        android:paddingHorizontal="24dp"
+        app:layout_constraintTop_toBottomOf="@id/header_section"
+        app:layout_constraintBottom_toTopOf="@id/action_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
+            android:text="Welcome to Sinusitis Detector"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="#25BEBE"
+            android:layout_marginTop="12dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Welcome to Sinusitis Detector"
-                android:textSize="20sp"
-                android:fontFamily="@font/montserrat_bold"
-                android:textColor="#25BEBE" />
-
-            <!-- Subtitle -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Your smart companion for early\ndetection of Sinusitis"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/black" />
-
-
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your smart companion for early\ndetection of Sinusitis"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/black"
+            android:layout_marginTop="4dp" />
 
         <!-- Report Card -->
         <LinearLayout
@@ -115,10 +114,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/shape_yellow_card"
-            android:padding="16dp"
-            android:layout_marginTop="8dp"
+            android:padding="5dp"
+            android:layout_marginTop="12dp"
             android:gravity="center"
-            android:layout_marginHorizontal="12dp"
             android:backgroundTint="#FFFF00">
 
             <TextView
@@ -138,7 +136,7 @@
                 android:fontFamily="@font/montserrat_black"
                 android:textSize="48sp"
                 android:textColor="@color/text_grey"
-                android:layout_marginBottom="-16dp"/>
+                android:layout_marginBottom="-16dp" />
 
             <TextView
                 android:id="@+id/tvLevel"
@@ -149,7 +147,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/text_teal"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="-5dp"/>
+                android:layout_marginBottom="-5dp" />
 
             <TextView
                 android:id="@+id/tvNote"
@@ -158,97 +156,93 @@
                 android:text="Please seek a doctor for\ndetailed information"
                 android:textSize="14sp"
                 android:textAlignment="center"
-                android:textColor="@color/text_teal"/>
+                android:textColor="@color/text_teal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:id="@+id/action_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Check Up -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="20dp">
+
+            <LinearLayout
+                android:id="@+id/layout_checkup"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/shape_teal_card"
+                android:padding="16dp"
+                android:clipToOutline="true">
+
+                <ImageView
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/ic_checkup"
+                    app:tint="@android:color/white" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check Up"
+                android:textColor="#25BEBE"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="5dp"/>
         </LinearLayout>
 
-        <!-- Action Buttons -->
+        <!-- Report -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="30dp">
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <!-- Check Up -->
             <LinearLayout
+                android:id="@+id/layout_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginEnd="20dp"
-                android:layout_gravity="center">
+                android:background="@drawable/shape_teal_card"
+                android:padding="16dp"
+                android:clipToOutline="true">
 
-                <!-- 🔷 Teal Background Only Around ImageView -->
-                <LinearLayout
-                    android:id="@+id/layout_checkup"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/shape_teal_card"
-                    android:padding="16dp"
-                    android:clipToOutline="true">
-
-                    <ImageView
-                        android:layout_width="88dp"
-                        android:layout_height="88dp"
-                        android:src="@drawable/ic_checkup"
-                        app:tint="@android:color/white" />
-                </LinearLayout>
-
-                <!-- 📝 TextView without teal background -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Check Up"
-                    android:textColor="#25BEBE"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
+                <ImageView
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/ic_plus"
+                    app:tint="@android:color/white" />
             </LinearLayout>
 
-
-            <!-- Report -->
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginEnd="8dp"
-                android:layout_gravity="center">
-
-                <!-- 🔷 Teal Background Only Around ImageView -->
-                <LinearLayout
-                    android:id="@+id/layout_report"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/shape_teal_card"
-                    android:padding="16dp"
-                    android:clipToOutline="true">
-
-                    <ImageView
-                        android:layout_width="88dp"
-                        android:layout_height="88dp"
-                        android:src="@drawable/ic_plus"
-                        app:tint="@android:color/white" />
-                </LinearLayout>
-
-                <!-- 📝 TextView without teal background -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Report"
-                    android:textColor="#25BEBE"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-
+                android:text="Report"
+                android:textColor="#25BEBE"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

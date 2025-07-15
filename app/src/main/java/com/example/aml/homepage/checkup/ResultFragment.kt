@@ -18,11 +18,7 @@ import com.example.aml.homepage.HomepageFragment
 class ResultFragment : Fragment() {
 
     private val formViewModel: FormViewModel by activityViewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sendFormData()
-    }
+    private var isDataSent = false  // ⬅️ untuk mencegah pengiriman ulang
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +26,11 @@ class ResultFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_result, container, false)
 
-        // Set button listener here
+        if (!isDataSent) {
+            sendFormData()
+            isDataSent = true
+        }
+
         val buttonNext = view.findViewById<Button>(R.id.buttonNext)
         buttonNext.setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -45,17 +45,23 @@ class ResultFragment : Fragment() {
     private fun sendFormData() {
         val formData = formViewModel.toFormData(requireContext())
 
+        // Validasi tambahan jika diperlukan:
+        if (formData.reportName.isBlank()) {
+            Toast.makeText(requireContext(), "Data tidak lengkap. Harap isi semua pertanyaan.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         ApiClient.apiService.submitForm(formData).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(requireContext(), "Form submitted successfully!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Form berhasil dikirim!", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), "Failed to submit form: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Gagal submit: ${response.code()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                Toast.makeText(requireContext(), "Network error: ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Error jaringan: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
     }

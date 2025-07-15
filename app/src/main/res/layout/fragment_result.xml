@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:paddingTop="24dp"
     tools:context=".homepage.checkup.ResultFragment">
@@ -14,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Decorative blob 1, below system bar -->
+        <!-- Decorative blob 1 -->
         <FrameLayout
             android:layout_width="570dp"
             android:layout_height="250dp"
@@ -22,14 +23,7 @@
             android:layout_marginStart="-100dp"
             android:background="@drawable/shape_blob" />
 
-        <!-- Decorative blob 2 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
+        <!-- Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="320dp"
@@ -40,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_check"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -48,17 +42,17 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Check Up Completed\nReport submitted and saved"
-                android:textColor="#25BEBE"
+                android:textColor="@color/teal"
                 android:textSize="26sp"
                 android:gravity="center"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="12dp" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_line"
-                android:layout_marginVertical="12dp"/>
+                android:layout_marginVertical="12dp" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -72,9 +66,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-
         </LinearLayout>
 
+        <!-- Decorative blob 2 -->
         <FrameLayout
             android:layout_width="751dp"
             android:layout_height="500dp"
@@ -93,12 +87,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_notepad"
-                    android:layout_marginBottom="60dp"/>
-
+                    android:layout_marginBottom="60dp" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
 
+    <!-- Button -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonNext"
         android:layout_width="300dp"
@@ -109,6 +103,5 @@
         android:fontFamily="@font/montserrat_bold"
         android:background="@drawable/shape_white_card"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="40dp"/>
-
+        android:layout_marginBottom="40dp" />
 </FrameLayout>

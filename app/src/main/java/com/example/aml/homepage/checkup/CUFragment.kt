@@ -29,7 +29,7 @@ class CUFragment : Fragment() {
                     R.anim.slide_in_right,
                     R.anim.slide_out_left
                 )
-                .replace(R.id.homepageContainer, Question1Fragment())
+                .replace(R.id.homepageContainer, PhotoQuestionFragment())
                 .addToBackStack(null)
                 .commit()
         }

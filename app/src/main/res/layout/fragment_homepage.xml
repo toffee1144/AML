@@ -92,16 +92,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome to Sinusitis Detector"
+            android:text="Welcome to Rhinosinusitis Detector"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
             android:textColor="#25BEBE"
             android:layout_marginTop="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your smart companion for early\ndetection of Sinusitis"
+            android:text="Your smart companion for early\ndetection of Rhinosinusitis"
             android:textAlignment="center"
             android:textSize="14sp"
             android:fontFamily="@font/montserrat_medium"

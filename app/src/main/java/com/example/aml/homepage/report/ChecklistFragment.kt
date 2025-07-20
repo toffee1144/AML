@@ -118,7 +118,6 @@ class ChecklistFragment : Fragment(R.layout.fragment_checklist) {
                 putInt("facialPain", data.facialPain)
                 putInt("fever", data.fever)
                 putInt("congestion", data.congestion)
-                putString("painFluctuate", data.painFluctuate)
                 putString("coughYesNo", data.coughYesNo)
             }
         }

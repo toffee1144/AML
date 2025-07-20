@@ -16,6 +16,22 @@ class Question1Fragment : Fragment() {
     private val binding get() = _binding!!
     private val sharedViewModel: FormViewModel by activityViewModels()
 
+    private val answerMap = mapOf(
+        R.id.r1 to 1,
+        R.id.r2 to 2,
+        R.id.r3 to 3,
+        R.id.r4 to 4,
+        R.id.r5 to 5
+    )
+
+    private val answerTextMap = mapOf(
+        R.id.r1 to "Tidak ada ingus sama sekali",
+        R.id.r2 to "Ada sedikit ingus, tapi tidak mengalir keluar",
+        R.id.r3 to "Ingus terasa mengalir ke depan (hidung) secara ringan",
+        R.id.r4 to "Ingus mengalir cukup banyak ke depan atau ke belakang tenggorokan (post-nasal drip)",
+        R.id.r5 to "Ingus mengalir sangat banyak dan terus-menerus, terasa mengganggu (baik ke depan maupun ke belakang)"
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,89 +42,71 @@ class Question1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val readOnly = arguments?.getBoolean("readOnly", false) ?: false
-
-        // Setup radio button manual handling
         val radioButtons = listOf(binding.r1, binding.r2, binding.r3, binding.r4, binding.r5)
+
+        // Manual radio selection
         radioButtons.forEach { rb ->
             rb.setOnClickListener {
-                radioButtons.forEach { it.isChecked = false }
-                rb.isChecked = true
+                binding.radioGroup.check(rb.id)
+                saveSelection(rb.id)
             }
         }
 
-        // Selalu restore state (baik readonly maupun editable)
-        sharedViewModel.getNasalDischarge()?.let {
-            setLikertChecked(it)
-        }
+        // Restore previous selection if any
+        sharedViewModel.ingusFlow.value?.let { restoreSelection(it) }
 
+        // Disable if readOnly
         if (readOnly) {
-            disableRadioButtons()
+            disableRadioButtons(radioButtons)
             binding.btnNext.visibility = View.GONE
-            binding.btnBack.visibility = View.GONE
+            binding.btnPrevious.visibility = View.GONE
         }
 
-        // Tombol Next Page
+        binding.btnPrevious.setOnClickListener {
+            navigateTo(CUFragment(), true)
+        }
+
         binding.btnNext.setOnClickListener {
-            val selected = getSelectedLikertValue()
-            if (selected == null) {
+            val selectedId = binding.radioGroup.checkedRadioButtonId
+            if (selectedId == -1) {
                 binding.errorText.visibility = View.VISIBLE
-                return@setOnClickListener
+            } else {
+                saveSelection(selectedId)
+                navigateTo(Question2Fragment(), false)
             }
-
-            sharedViewModel.setNasalDischarge(selected)
-
-            parentFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.slide_in_right, R.anim.slide_out_left,
-                    R.anim.slide_in_left, R.anim.slide_out_right
-                )
-                .replace(R.id.homepageContainer, Question2Fragment())
-                .addToBackStack(null)
-                .commit()
-        }
-
-        // Tombol Back (pojok kiri atas)
-        binding.btnBack.setOnClickListener {
-            val selected = getSelectedLikertValue()
-            if (selected != null) {
-                sharedViewModel.setNasalDischarge(selected)
-            }
-
-            parentFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.slide_in_left, R.anim.slide_out_right,
-                    R.anim.slide_in_right, R.anim.slide_out_left
-                )
-                .replace(R.id.homepageContainer, CUFragment())
-                .addToBackStack(null)
-                .commit()
         }
     }
 
-    private fun getSelectedLikertValue(): Int? {
-        return when {
-            binding.r1.isChecked -> 1
-            binding.r2.isChecked -> 2
-            binding.r3.isChecked -> 3
-            binding.r4.isChecked -> 4
-            binding.r5.isChecked -> 5
-            else -> null
+    private fun saveSelection(checkedId: Int) {
+        val selectedValue = answerMap[checkedId]
+        val selectedText = answerTextMap[checkedId]
+        if (selectedValue != null && selectedText != null) {
+            sharedViewModel.setIngusFlow(selectedValue)
+            sharedViewModel.setIngusFlowText(selectedText)
+            binding.errorText.visibility = View.GONE
         }
     }
 
-    private fun setLikertChecked(value: Int) {
-        when (value) {
-            1 -> binding.r1.isChecked = true
-            2 -> binding.r2.isChecked = true
-            3 -> binding.r3.isChecked = true
-            4 -> binding.r4.isChecked = true
-            5 -> binding.r5.isChecked = true
-        }
+    private fun restoreSelection(value: Int) {
+        val id = answerMap.entries.find { it.value == value }?.key
+        id?.let { binding.radioGroup.check(it) }
     }
 
-    private fun disableRadioButtons() {
-        val radioButtons = listOf(binding.r1, binding.r2, binding.r3, binding.r4, binding.r5)
-        radioButtons.forEach { it.isEnabled = false }
+    private fun disableRadioButtons(buttons: List<RadioButton>) {
+        buttons.forEach { it.isEnabled = false }
+    }
+
+    private fun navigateTo(fragment: Fragment, toPrevious: Boolean) {
+        parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                if (toPrevious) R.anim.slide_in_left else R.anim.slide_in_right,
+                if (toPrevious) R.anim.slide_out_right else R.anim.slide_out_left,
+                if (toPrevious) R.anim.slide_in_right else R.anim.slide_in_left,
+                if (toPrevious) R.anim.slide_out_left else R.anim.slide_out_right
+            )
+            .replace(R.id.homepageContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {

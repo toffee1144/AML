@@ -15,6 +15,7 @@ class Question2Fragment : Fragment() {
     private var _binding: FragmentQuestion2Binding? = null
     private val binding get() = _binding!!
     private val sharedViewModel: FormViewModel by activityViewModels()
+    private var selectedLikert: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,28 +28,34 @@ class Question2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val readOnly = arguments?.getBoolean("readOnly", false) ?: false
 
-        val radioButtons = listOf(binding.r1, binding.r2, binding.r3, binding.r4, binding.r5)
+        val likertViews = listOf(
+            binding.likert1,
+            binding.likert2,
+            binding.likert3,
+            binding.likert4,
+            binding.likert5
+        )
 
-        // Manual single-select
-        radioButtons.forEach { rb ->
-            rb.setOnClickListener {
-                radioButtons.forEach { it.isChecked = false }
-                rb.isChecked = true
+        // Manual single-select image logic
+        likertViews.forEachIndexed { index, imageView ->
+            imageView.setOnClickListener {
+                if (!readOnly) {
+                    updateLikertSelection(index + 1)
+                }
             }
         }
 
-        // Restore jawaban sebelumnya (selalu restore meskipun tidak readOnly)
+        // Restore previous answer
         sharedViewModel.getAnosmia()?.let {
-            setLikertChecked(it)
+            updateLikertSelection(it)
         }
 
         if (readOnly) {
-            disableRadioButtons()
+            likertViews.forEach { it.isEnabled = false }
             binding.btnNext.visibility = View.GONE
             binding.btnPrevious.visibility = View.GONE
         }
 
-        // Tombol Next
         binding.btnNext.setOnClickListener {
             val selected = getSelectedLikertValue()
             if (selected == null) {
@@ -68,12 +75,8 @@ class Question2Fragment : Fragment() {
                 .commit()
         }
 
-        // Tombol Previous
         binding.btnPrevious.setOnClickListener {
-            val selected = getSelectedLikertValue()
-            if (selected != null) {
-                sharedViewModel.setAnosmia(selected)
-            }
+            getSelectedLikertValue()?.let { sharedViewModel.setAnosmia(it) }
 
             parentFragmentManager.beginTransaction()
                 .setCustomAnimations(
@@ -85,12 +88,8 @@ class Question2Fragment : Fragment() {
                 .commit()
         }
 
-        // Tombol Back (pojok kiri atas)
         binding.btnBack.setOnClickListener {
-            val selected = getSelectedLikertValue()
-            if (selected != null) {
-                sharedViewModel.setAnosmia(selected)
-            }
+            getSelectedLikertValue()?.let { sharedViewModel.setAnosmia(it) }
 
             parentFragmentManager.beginTransaction()
                 .setCustomAnimations(
@@ -103,30 +102,28 @@ class Question2Fragment : Fragment() {
         }
     }
 
+    private fun updateLikertSelection(value: Int) {
+        val backgrounds = listOf(
+            binding.likert1.parent as View,
+            binding.likert2.parent as View,
+            binding.likert3.parent as View,
+            binding.likert4.parent as View,
+            binding.likert5.parent as View
+        )
+
+        backgrounds.forEachIndexed { index, view ->
+            view.setBackgroundResource(
+                if (index + 1 == value) R.drawable.bg_likert_selected
+                else R.drawable.bg_likert_unselected
+            )
+        }
+
+        selectedLikert = value
+        binding.errorText.visibility = View.GONE
+    }
+
     private fun getSelectedLikertValue(): Int? {
-        return when {
-            binding.r1.isChecked -> 1
-            binding.r2.isChecked -> 2
-            binding.r3.isChecked -> 3
-            binding.r4.isChecked -> 4
-            binding.r5.isChecked -> 5
-            else -> null
-        }
-    }
-
-    private fun setLikertChecked(value: Int) {
-        when (value) {
-            1 -> binding.r1.isChecked = true
-            2 -> binding.r2.isChecked = true
-            3 -> binding.r3.isChecked = true
-            4 -> binding.r4.isChecked = true
-            5 -> binding.r5.isChecked = true
-        }
-    }
-
-    private fun disableRadioButtons() {
-        listOf(binding.r1, binding.r2, binding.r3, binding.r4, binding.r5)
-            .forEach { it.isEnabled = false }
+        return selectedLikert
     }
 
     override fun onDestroyView() {

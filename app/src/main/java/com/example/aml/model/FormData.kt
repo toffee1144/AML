@@ -1,12 +1,15 @@
 package com.example.aml.model
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.coroutines.flow.Flow
+import org.w3c.dom.Text
 
 data class FormData(
-    @SerializedName("report_uid")
-    val reportUid: String,
 
-    @SerializedName("user_id")
+    @SerializedName("report_uid")
+    val reportUid: String = "",
+
+    @SerializedName("userId")
     val userId: String,
 
     @SerializedName("report_name")
@@ -32,14 +35,15 @@ data class FormData(
     val fever: Int,
     val congestion: Int,
 
-    @SerializedName("pain_fluctuate")
-    val painFluctuate: String,
-
     @SerializedName("cough_yes_no")
     val coughYesNo: String,
 
+    val ingusFlow: Int,
+
     val otherSymptoms: String?,    // nullable karena optional
-    val ingusPhotoUri: String?,    // Uri disimpan sebagai String path
+
+    @SerializedName("ingus_photo_base64")
+    val ingusPhotoBase64: String? = null,
 
     @SerializedName("checkup_status")
     val checkupStatus: String,

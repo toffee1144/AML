@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!-- Konten Scrollable -->
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <!-- HEADER -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginBottom="16dp">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="8dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_circle_back"
+                    android:src="@drawable/ic_back_arrow"
+                    android:scaleType="center"
+                    android:contentDescription="Back Button"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/vector__8_" />
+
+                <ImageView
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:translationY="28dp"
+                    android:translationX="40dp"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/group" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="17dp"
+                android:layout_marginBottom="2dp">
+
+
+                <!-- Isi pertanyaan -->
+                <TextView
+                    android:id="@+id/textQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Apakah Anda memiliki cairan hidung kental berwarna kuning atau hijau?"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:justificationMode="inter_word"
+
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/teal"
+                    android:lineSpacingExtra="2dp" />
+            </LinearLayout>
+
+            <!-- PETUNJUK -->
+
+            <!-- ERROR -->
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Silakan pilih jawaban!"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:id="@+id/textFotoIngus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sertakan foto ingus Anda"
+                android:textSize="20sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/teal"
+                android:lineSpacingExtra="2dp" />
+
+            <TextView
+                android:id="@+id/btnUploadPhoto"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Upload Foto"
+                android:textColor="@color/teal"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="14sp"
+                android:background="@drawable/shape_teal_card_no_bg"
+                android:padding="10dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Spacer biar ScrollView ngasih ruang di bawah tombol -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- TOMBOL NEXT KECIL DI KANAN BAWAH -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:text="Next Page"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="16sp"
+        android:background="@drawable/shape_teal_card" />
+</FrameLayout>

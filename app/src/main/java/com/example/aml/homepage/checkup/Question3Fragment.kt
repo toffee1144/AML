@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.aml.R
@@ -27,105 +26,68 @@ class Question3Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val readOnly = arguments?.getBoolean("readOnly", false) ?: false
 
-        val radioButtons = listOf(binding.r1, binding.r2, binding.r3, binding.r4, binding.r5)
-        radioButtons.forEach { rb ->
-            rb.setOnClickListener {
-                radioButtons.forEach { it.isChecked = false }
-                rb.isChecked = true
+        val likertButtons = listOf(
+            binding.likert1,
+            binding.likert2,
+            binding.likert3,
+            binding.likert4,
+            binding.likert5
+        )
+
+        fun updateLikertSelection(selectedIndex: Int) {
+            likertButtons.forEachIndexed { index, imageView ->
+                val bgRes = if (index == selectedIndex) R.drawable.bg_likert_selected else R.drawable.bg_likert_unselected
+                (imageView.parent as View).setBackgroundResource(bgRes)
             }
         }
 
-        // Restore jawaban sebelumnya (selalu restore)
+        likertButtons.forEachIndexed { index, imageView ->
+            imageView.setOnClickListener {
+                updateLikertSelection(index)
+                sharedViewModel.setFacialPain(index + 1)
+                binding.errorText.visibility = View.GONE
+            }
+        }
+
         sharedViewModel.getFacialPain()?.let {
-            setLikertChecked(it)
+            if (it in 1..5) updateLikertSelection(it - 1)
         }
 
         if (readOnly) {
-            disableRadioButtons()
+            likertButtons.forEach { it.isEnabled = false }
             binding.btnNext.visibility = View.GONE
             binding.btnPrevious.visibility = View.GONE
         }
 
-        // Tombol Back (pojok kiri atas)
         binding.btnBack.setOnClickListener {
-            val selected = getSelectedLikertValue()
-            if (selected != null) {
-                sharedViewModel.setFacialPain(selected)
-            }
-
-            parentFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.slide_in_left, R.anim.slide_out_right,
-                    R.anim.slide_in_right, R.anim.slide_out_left
-                )
-                .replace(R.id.homepageContainer, CUFragment())
-                .addToBackStack(null)
-                .commit()
+            sharedViewModel.getFacialPain()?.let { sharedViewModel.setFacialPain(it) }
+            navigateToFragment(CUFragment(), R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        // Tombol Previous
         binding.btnPrevious.setOnClickListener {
-            val selected = getSelectedLikertValue()
-            if (selected != null) {
-                sharedViewModel.setFacialPain(selected)
-            }
-
-            parentFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.slide_in_left, R.anim.slide_out_right,
-                    R.anim.slide_in_right, R.anim.slide_out_left
-                )
-                .replace(R.id.homepageContainer, Question2Fragment())
-                .addToBackStack(null)
-                .commit()
+            sharedViewModel.getFacialPain()?.let { sharedViewModel.setFacialPain(it) }
+            navigateToFragment(Question2Fragment(), R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        // Tombol Next
-        // Tombol Next
         binding.btnNext.setOnClickListener {
-            val selected = getSelectedLikertValue()
+            val selected = sharedViewModel.getFacialPain()
             if (selected == null) {
                 binding.errorText.visibility = View.VISIBLE
                 return@setOnClickListener
             }
-
-            sharedViewModel.setFacialPain(selected)
-
-            parentFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.slide_in_right, R.anim.slide_out_left,
-                    R.anim.slide_in_left, R.anim.slide_out_right
-                )
-                .replace(R.id.homepageContainer, Question4Fragment())
-                .addToBackStack(null)
-                .commit()
+            navigateToFragment(Question4Fragment(), R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 
-    private fun getSelectedLikertValue(): Int? {
-        return when {
-            binding.r1.isChecked -> 1
-            binding.r2.isChecked -> 2
-            binding.r3.isChecked -> 3
-            binding.r4.isChecked -> 4
-            binding.r5.isChecked -> 5
-            else -> null
-        }
-    }
-
-    private fun setLikertChecked(value: Int) {
-        when (value) {
-            1 -> binding.r1.isChecked = true
-            2 -> binding.r2.isChecked = true
-            3 -> binding.r3.isChecked = true
-            4 -> binding.r4.isChecked = true
-            5 -> binding.r5.isChecked = true
-        }
-    }
-
-    private fun disableRadioButtons() {
-        listOf(binding.r1, binding.r2, binding.r3, binding.r4, binding.r5)
-            .forEach { it.isEnabled = false }
+    private fun navigateToFragment(fragment: Fragment, enterAnim: Int, exitAnim: Int) {
+        parentFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                enterAnim, exitAnim,
+                R.anim.slide_in_left, R.anim.slide_out_right
+            )
+            .replace(R.id.homepageContainer, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {

@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Think you’re just tired? Think again\nLet’s check if it might be Sinusitis."
+                android:text="Think you’re just tired? Think again\nLet’s check if it might be Rhinosinusitis."
                 android:textSize="14sp"
                 android:textColor="@color/black" />
         </LinearLayout>

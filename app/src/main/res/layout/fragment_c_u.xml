@@ -40,7 +40,7 @@
         android:id="@+id/btnStart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Start Sinusitis Report"
+        android:text="Start Rhinosinusitis Report"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:fontFamily="@font/montserrat_bold"

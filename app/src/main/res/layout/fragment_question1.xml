@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Konten Scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- HEADER -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginBottom="16dp">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="8dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/bg_circle_back"
+                    android:src="@drawable/ic_back_arrow"
+                    android:scaleType="center"
+                    android:contentDescription="Back Button"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/vector__8_" />
+
+                <ImageView
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:translationY="28dp"
+                    android:translationX="40dp"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/group" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="17dp"
+                android:layout_marginBottom="2dp">
+
+                <!-- Nomor -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1."
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/teal"
+                    android:layout_marginRight="4dp" />
+
+                <!-- Isi pertanyaan -->
+                <TextView
+                    android:id="@+id/textQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bagaimana Anda merasakan aliran ingus dari hidung Anda dalam beberapa hari terakhir?"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:justificationMode="inter_word"
+
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/teal"
+                    android:lineSpacingExtra="2dp" />
+            </LinearLayout>
+
+            <!-- PETUNJUK -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" (Pilih salah satu angka dari 1 sampai 5 yang paling sesuai dengan kondisi Anda)"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:lineSpacingExtra="2dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="35dp"
+                android:gravity="start">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="7dp">
+
+                    <RadioButton
+                        android:id="@+id/r1"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/likert_circle"
+                        android:button="@null"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tidak ada ingus sama sekali"
+                        android:layout_marginStart="12dp"
+                        android:textSize="17sp"
+                        android:textColor="@android:color/black"
+                        android:fontFamily="@font/montserrat_medium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="7dp">
+
+                    <RadioButton
+                        android:id="@+id/r2"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/likert_circle"
+                        android:button="@null"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Ada sedikit ingus, tapi tidak mengalir keluar"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="7dp">
+
+                    <RadioButton
+                        android:id="@+id/r3"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/likert_circle"
+                        android:button="@null"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Ingus terasa mengalir ke depan (hidung) secara ringan"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="7dp">
+
+                    <RadioButton
+                        android:id="@+id/r4"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/likert_circle"
+                        android:button="@null"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Ingus mengalir cukup banyak ke depan atau ke belakang tenggorokan (post-nasal drip)"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="7dp">
+
+                    <RadioButton
+                        android:id="@+id/r5"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/likert_circle"
+                        android:button="@null"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Ingus mengalir sangat banyak dan terus-menerus, terasa mengganggu (baik ke depan maupun ke belakang)"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp" />
+                </LinearLayout>
+            </RadioGroup>
+
+            <!-- ERROR -->
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Silakan pilih jawaban!"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="gone"
+                android:textAlignment="center"
+                android:layout_marginTop="12dp" />
+
+            <!-- Spacer untuk ruang tombol -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- TOMBOL NEXT -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:text="Next Page"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="16sp"
+        android:background="@drawable/shape_teal_card" />
+
+    <!-- TOMBOL PREVIOUS -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPrevious"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:text="Previous Page"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="15sp"
+        android:background="@drawable/shape_teal_card" />
+</FrameLayout>

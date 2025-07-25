@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Konten Scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- HEADER -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_marginBottom="16dp">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="8dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/bg_circle_back"
+                    android:src="@drawable/ic_back_arrow"
+                    android:scaleType="center"
+                    android:contentDescription="Back Button" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/vector__8_" />
+
+                <ImageView
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:translationY="28dp"
+                    android:translationX="40dp"
+                    android:layout_gravity="bottom"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/group" />
+
+            </FrameLayout>
+
+            <!-- Pertanyaan -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="17dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8."
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/teal"
+                    android:layout_marginRight="4dp" />
+
+                <TextView
+                    android:id="@+id/textQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Apakah Anda mengalami gejala lain yang belum disebutkan di pertanyaan sebelumnya?"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:justificationMode="inter_word"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/teal"
+                    android:lineSpacingExtra="2dp" />
+            </LinearLayout>
+
+            <!-- Label Jawaban Anda -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jawaban Anda"
+                android:textSize="14sp"
+                android:textColor="#444"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_medium" />
+
+            <!-- TextArea -->
+            <EditText
+                android:id="@+id/inputText"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/edittext_background"
+                android:gravity="top|start"
+                android:padding="12dp"
+                android:hint="Tuliskan gejala lain di sini..."
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:inputType="textMultiLine"
+                android:maxLines="6" />
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- TOMBOL NEXT -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="16sp"
+        android:background="@drawable/shape_teal_card" />
+
+    <!-- TOMBOL PREVIOUS -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPrevious"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:text="Previous Page"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="15sp"
+        android:background="@drawable/shape_teal_card" />
+</FrameLayout>

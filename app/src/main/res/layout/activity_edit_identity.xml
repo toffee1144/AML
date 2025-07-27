@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -87,11 +88,12 @@
                     android:id="@+id/etDateOfBirth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Date of Birth (DD/MM/YYYY)"
+                    android:hint="Date of Birth (YYYY-MM-DD)"
                     android:layout_marginTop="12dp"
                     android:padding="12dp"
                     android:background="@drawable/edit_text_background"
                     android:textSize="14sp" />
+
                 <RadioGroup
                     android:id="@+id/rgSex"
                     android:layout_width="match_parent"
@@ -106,7 +108,7 @@
                         android:text="Male"
                         android:checked="true"
                         android:textSize="14sp"
-                        android:layout_marginEnd="16dp"/>
+                        android:layout_marginEnd="16dp" />
 
                     <RadioButton
                         android:id="@+id/rbFemale"
@@ -120,11 +122,35 @@
                     android:id="@+id/etPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Upload Photo"
+                    android:hint="Photo URL (Auto-filled)"
                     android:layout_marginTop="12dp"
                     android:padding="12dp"
                     android:background="@drawable/edit_text_background"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:enabled="false" />
+
+                <!-- Pick photo button -->
+                <ImageView
+                    android:id="@+id/btnPickPhoto"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_upload"
+                    android:contentDescription="Pick Photo"
+                    android:background="?android:selectableItemBackgroundBorderless" />
+
+                <!-- Preview photo -->
+                <ImageView
+                    android:id="@+id/imgProfilePreview"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person_placeholder"
+                    android:background="@drawable/preview_border"
+                    android:contentDescription="Profile Photo Preview" />
 
                 <EditText
                     android:id="@+id/etEmail"
@@ -198,8 +224,8 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_check_circle"
-                android:tint="@android:color/white"
-                android:layout_gravity="center"/>
+                app:tint="@android:color/white"
+                android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -208,17 +234,16 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="12dp" />
 
             <TextView
                 android:id="@+id/tvRedirectCountdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Direct in 3s"
+                android:text="Redirect in 3s"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp" />
         </LinearLayout>
     </LinearLayout>
-
 </FrameLayout>

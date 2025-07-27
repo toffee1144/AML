@@ -2,6 +2,7 @@ package com.example.aml.utility
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.content.edit
 
 object SessionManager {
@@ -29,15 +30,21 @@ object SessionManager {
     }
 
 
+    // Pisahkan storage untuk foto profil
+    private const val PROFILE_PREF = "profile_prefs"
+    private const val KEY_PROFILE_PHOTO = "profile_photo_url"
+
     fun setProfilePhotoUrl(context: Context, url: String) {
-        val editor = getPrefs(context).edit()
-        editor.putString("profile_photo_url", url)
-        editor.apply()
+        val prefs = context.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE)
+        prefs.edit().putString(KEY_PROFILE_PHOTO, url).apply()
+        Log.d("SessionManager", "Saving profile photo URL: $url")
     }
 
     fun getProfilePhotoUrl(context: Context): String? {
-        return getPrefs(context).getString("profile_photo_url", null)
+        val prefs = context.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE)
+        return prefs.getString(KEY_PROFILE_PHOTO, null)
     }
+
 
     fun getUsername(context: Context): String? {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

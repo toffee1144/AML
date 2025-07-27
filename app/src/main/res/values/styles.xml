@@ -8,4 +8,17 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="DetailLabel">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="DetailValue">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+
 </resources>

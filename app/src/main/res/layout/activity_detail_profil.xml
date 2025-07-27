@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Header with Back and Title -->
+        <!-- Header -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
@@ -37,18 +37,19 @@
                 android:layout_marginTop="16dp" />
         </RelativeLayout>
 
-        <!-- Profile Image -->
+        <!-- Profile Picture -->
         <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="-60dp"
-            android:src="@drawable/ic_login"
             android:background="@drawable/circle_yellow_bg"
             android:scaleType="centerCrop"
-            android:layout_gravity="center" />
+            android:src="@drawable/ic_person_placeholder"
+            android:contentDescription="Profile photo"
+            android:elevation="4dp" />
 
-        <!-- Info Section -->
+        <!-- Content -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,153 +57,109 @@
             android:padding="16dp"
             android:gravity="center_horizontal">
 
-            <!-- Full Name, DOB, Sex -->
+            <!-- Section: Name, DOB, Gender -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_teal_bg"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:text="Full Name"
+                    style="@style/DetailLabel" />
+
+                <TextView
+                    android:id="@+id/tvFullName"
+                    style="@style/DetailValue" />
+
+                <TextView
+                    android:text="Date of Birth"
+                    style="@style/DetailLabel"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/tvDOB"
+                    style="@style/DetailValue" />
+
+                <TextView
+                    android:text="Gender"
+                    style="@style/DetailLabel"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/tvGender"
+                    style="@style/DetailValue" />
+            </LinearLayout>
+
+            <!-- Section: Photo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_teal_bg"
                 android:orientation="horizontal"
                 android:padding="12dp"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvFullName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="..."
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_bold" />
-
-                    <TextView
-                        android:id="@+id/tvDOB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="..."
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_bold" />
-
-                    <TextView
-                        android:id="@+id/tvGender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="..."
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Guest Guest\n05 July 2025\nMen"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Photo -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_teal_bg"
-                android:padding="12dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="Photo"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/montserrat_regular"
+                    style="@style/DetailLabel"
                     android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tvPhotoName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Profil.jpg"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/montserrat_bold" />
+                    style="@style/DetailValue"
+                    android:text="-" />
             </LinearLayout>
 
-            <!-- Email & Password -->
+            <!-- Section: Email & Password -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_teal_bg"
+                android:orientation="vertical"
                 android:padding="12dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="16dp">
 
+                <TextView
+                    android:text="Email"
+                    style="@style/DetailLabel" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    style="@style/DetailValue" />
+
+                <TextView
+                    android:text="Password"
+                    style="@style/DetailLabel"
+                    android:layout_marginTop="8dp" />
+
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Email"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_regular" />
-
-                    <TextView
-                        android:id="@+id/tvEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="guestlorem@gmail"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Password"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:layout_marginTop="8dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/tvPassword"
-                        android:layout_width="wrap_content"
+                        style="@style/DetailValue"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="********"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_bold" />
-                </LinearLayout>
+                        android:layout_weight="1"
+                        android:text="********" />
 
-                <ImageView
-                    android:id="@+id/btnShowPassword"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_eye"
-                    app:tint="@android:color/white" />
+                    <ImageView
+                        android:id="@+id/btnShowPassword"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_eye"
+                        app:tint="@android:color/white" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Edit Button -->
+            <!-- Button -->
             <Button
                 android:id="@+id/btnEditIdentity"
                 android:layout_width="match_parent"
@@ -210,7 +167,8 @@
                 android:text="Edit Personal Identity"
                 android:backgroundTint="@color/teal"
                 android:textColor="@android:color/white"
-                android:fontFamily="@font/montserrat_bold"/>
+                android:fontFamily="@font/montserrat_bold"
+                android:elevation="2dp"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

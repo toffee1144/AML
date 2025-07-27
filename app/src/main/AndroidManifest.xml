@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+
 
     <application
         android:allowBackup="true"
@@ -24,7 +27,7 @@
             android:name=".profile.EditIdentityActivity"
             android:exported="false" />
         <activity
-            android:name=".profile.DetailProfileActivity"
+            android:name=".profile.DetailProfilActivity"
             android:exported="false" />
         <activity android:name=".homepage.HomepageActivity" />
         <activity android:name=".login.LoginActivity" />

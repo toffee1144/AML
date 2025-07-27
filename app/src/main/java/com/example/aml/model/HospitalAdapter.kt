@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aml.R // Ini penting untuk akses R.layout dan R.id
+import com.example.aml.R
 
 class HospitalAdapter(private val hospitals: List<Hospital>) :
     RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {

@@ -10,6 +10,10 @@ import com.example.aml.R
 import com.example.aml.model.ReportSummary
 import com.example.aml.network.ApiClient
 import retrofit2.Call
+import android.content.Intent
+import android.widget.Button
+import com.example.aml.MapActivity // sesuaikan dengan package MapActivity milikmu
+
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -32,6 +36,11 @@ class RcFragment : Fragment(R.layout.fragment_rc) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val btnOpenMap = view.findViewById<Button>(R.id.btnOpenMap)
+        btnOpenMap.setOnClickListener {
+            val intent = Intent(requireContext(), MapActivity::class.java)
+            startActivity(intent)
+        }
         tvSymptom = view.findViewById(R.id.tvSymptom)
         tvRiskLevel = view.findViewById(R.id.tvRiskLevel)
         tvReportContent = view.findViewById(R.id.tvReportContent)

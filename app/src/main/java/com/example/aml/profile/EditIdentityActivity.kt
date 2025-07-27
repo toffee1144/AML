@@ -1,60 +1,62 @@
-package com.example.aml
+package com.example.aml.profile
 
 import android.app.DatePickerDialog
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.example.aml.model.UpdateProfileResponse
-import com.example.aml.network.ApiClient
+import com.example.aml.R
+import com.example.aml.model.CloudinaryUploadResponse
 import com.example.aml.profile.UpdateProfileRequest
-import okhttp3.*
-import org.json.JSONObject
+import com.example.aml.model.UpdateProfileResponse
+import com.example.aml.profile.UserProfileResponse
+import com.example.aml.network.ApiClient
+import com.example.aml.utility.FileUtil
+import com.example.aml.utility.SessionManager
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.IOException
+import java.io.File
+import java.text.SimpleDateFormat
 import java.util.*
 
 class EditIdentityActivity : AppCompatActivity() {
+    private val rfcFormat = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US)
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     private lateinit var etFullName: EditText
     private lateinit var etDateOfBirth: EditText
-    private lateinit var etPhoto: EditText
-    private lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var etConfirmPassword: EditText
     private lateinit var rgSex: RadioGroup
     private lateinit var rbMale: RadioButton
     private lateinit var rbFemale: RadioButton
-    private lateinit var btnUpdateIdentity: Button
-    private lateinit var successOverlay: LinearLayout
-    private lateinit var tvRedirectCountdown: TextView
-    private lateinit var btnBack: ImageView
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var etConfirmPassword: EditText
+    private lateinit var etPhoto: EditText
     private lateinit var btnPickPhoto: ImageView
+    private lateinit var imgProfilePreview: ImageView
+    private lateinit var btnUpdateIdentity: Button
 
-    private var uploadedPhotoUrl: String? = null
 
-    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+    private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
-            uploadToCloudinary(it, this,
-                onSuccess = { url ->
-                    uploadedPhotoUrl = url
-                    etPhoto.setText(url)
-                    Glide.with(this).load(url).apply(RequestOptions.circleCropTransform()).into(btnPickPhoto)
-                },
-                onError = { error ->
-                    Toast.makeText(this, "Upload error: $error", Toast.LENGTH_SHORT).show()
-                })
+            val file = FileUtil.from(this, it)
+            if (file != null) {
+                uploadToCloudinary(file) { imageUrl ->
+                    SessionManager.setProfilePhotoUrl(this@EditIdentityActivity, imageUrl)
+                    etPhoto.setText(imageUrl)
+                    Glide.with(this)
+                        .load(imageUrl)
+                        .placeholder(R.drawable.ic_person_placeholder)
+                        .into(imgProfilePreview)
+                }
+            } else {
+                Toast.makeText(this, "Gagal membaca file gambar", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -64,152 +66,138 @@ class EditIdentityActivity : AppCompatActivity() {
 
         etFullName = findViewById(R.id.etFullName)
         etDateOfBirth = findViewById(R.id.etDateOfBirth)
-        etPhoto = findViewById(R.id.etPhoto)
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
-        etConfirmPassword = findViewById(R.id.etConfirmPassword)
         rgSex = findViewById(R.id.rgSex)
         rbMale = findViewById(R.id.rbMale)
         rbFemale = findViewById(R.id.rbFemale)
-        btnUpdateIdentity = findViewById(R.id.btnUpdateIdentity)
-        successOverlay = findViewById(R.id.successOverlay)
-        tvRedirectCountdown = findViewById(R.id.tvRedirectCountdown)
-        btnBack = findViewById(R.id.btnBack)
+        etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPassword)
+        etConfirmPassword = findViewById(R.id.etConfirmPassword)
+        etPhoto = findViewById(R.id.etPhoto)
         btnPickPhoto = findViewById(R.id.btnPickPhoto)
+        imgProfilePreview = findViewById(R.id.imgProfilePreview)
+        btnUpdateIdentity = findViewById(R.id.btnUpdateIdentity)
 
         etDateOfBirth.setOnClickListener {
-            showDatePickerDialog()
+            val cal = Calendar.getInstance()
+            DatePickerDialog(
+                this,
+                { _, year, month, day ->
+                    val selected = Calendar.getInstance().apply { set(year, month, day) }
+                    etDateOfBirth.setText(dateFormat.format(selected.time))
+                },
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         btnPickPhoto.setOnClickListener {
-            pickImageLauncher.launch("image/*")
+            imagePickerLauncher.launch("image/*")
         }
 
         btnUpdateIdentity.setOnClickListener {
-            updateProfile()
+            val password = etPassword.text.toString()
+            val confirmPassword = etConfirmPassword.text.toString()
+            if (password != confirmPassword) {
+                Toast.makeText(this, "Password tidak cocok", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val gender = if (rbMale.isChecked) "Male" else "Female"
+
+            val request = UpdateProfileRequest(
+                userId = SessionManager.getUserId(this),
+                username = etFullName.text.toString(),
+                email = etEmail.text.toString(),
+                password = password.takeIf { it.isNotEmpty() },
+                dateOfBirth = etDateOfBirth.text.toString(),
+                sex = gender,
+                profilePhotoUrl = etPhoto.text.toString()
+            )
+
+            ApiClient.apiService.updateProfile(request)
+                .enqueue(object : Callback<UpdateProfileResponse> {
+                    override fun onResponse(call: Call<UpdateProfileResponse>, response: Response<UpdateProfileResponse>) {
+                        if (response.isSuccessful && response.body() != null) {
+                            Toast.makeText(this@EditIdentityActivity, "Berhasil disimpan", Toast.LENGTH_SHORT).show()
+                            finish()
+                        } else {
+                            Toast.makeText(this@EditIdentityActivity, "Gagal menyimpan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<UpdateProfileResponse>, t: Throwable) {
+                        Toast.makeText(this@EditIdentityActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
         }
 
-        btnBack.setOnClickListener {
-            finish()
-        }
+        loadUserProfile()
     }
 
-    private fun showDatePickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(this, { _, y, m, d ->
-            val formatted = String.format("%04d-%02d-%02d", y, m + 1, d)
-            etDateOfBirth.setText(formatted)
-        }, year, month, day)
-
-        datePickerDialog.show()
-    }
-
-    private fun updateProfile() {
-        val userId = "5e27c94c-105c-4658-bf4a-d5a06a0b751e"
-        val username = etFullName.text.toString()
-        val email = etEmail.text.toString()
-        val password = etPassword.text.toString()
-        val confirmPassword = etConfirmPassword.text.toString()
-        val dateOfBirth = etDateOfBirth.text.toString()
-        val profilePhotoUrl = uploadedPhotoUrl ?: etPhoto.text.toString()
-        val sex = if (rbMale.isChecked) "Male" else "Female"
-
-        if (password != confirmPassword) {
-            Toast.makeText(this, "Password and confirmation do not match", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val request = UpdateProfileRequest(
-            userId = userId,
-            username = username,
-            email = email,
-            password = password,
-            dateOfBirth = dateOfBirth,
-            sex = sex,
-            profilePhotoUrl = profilePhotoUrl
-        )
-
-        ApiClient.apiService.updateProfile(request).enqueue(object : Callback<UpdateProfileResponse> {
+    private fun loadUserProfile() {
+        val userId = SessionManager.getUserId(this)
+        ApiClient.apiService.getUserProfile(userId).enqueue(object : Callback<UserProfileResponse> {
             override fun onResponse(
-                call: Call<UpdateProfileResponse>,
-                response: Response<UpdateProfileResponse>
+                call: Call<UserProfileResponse>,
+                response: Response<UserProfileResponse>
             ) {
-                if (response.isSuccessful) {
-                    showSuccessOverlay()
+                if (response.isSuccessful && response.body() != null) {
+                    val user = response.body()!!
+                    etFullName.setText(user.username)
+                    etEmail.setText(user.email)
+                    etDateOfBirth.setText(
+                        try {
+                            val parsed = rfcFormat.parse(user.dateOfBirth)
+                            dateFormat.format(parsed!!)
+                        } catch (e: Exception) {
+                            user.dateOfBirth // fallback: biarin apa adanya kalau sudah yyyy-MM-dd
+                        }
+                    )
+
+
+                    if (user.sex == "Male") rbMale.isChecked = true
+                    else if (user.sex == "Female") rbFemale.isChecked = true
+
+                    user.profilePhotoUrl?.let {
+                        etPhoto.setText(it)
+                        Glide.with(this@EditIdentityActivity)
+                            .load(it)
+                            .placeholder(R.drawable.ic_person_placeholder)
+                            .into(imgProfilePreview)
+                    }
                 } else {
-                    Toast.makeText(this@EditIdentityActivity, "Update failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@EditIdentityActivity, "Gagal memuat profil", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<UpdateProfileResponse>, t: Throwable) {
-                Toast.makeText(this@EditIdentityActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
+                Toast.makeText(this@EditIdentityActivity, "Gagal memuat profil: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun showSuccessOverlay() {
-        successOverlay.visibility = View.VISIBLE
-        var seconds = 3
-        tvRedirectCountdown.text = "Redirect in ${seconds}s"
+    private fun uploadToCloudinary(file: File, onSuccess: (String) -> Unit) {
+        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+        val uploadPreset = MultipartBody.Part.createFormData("upload_preset", "aml_profile")
 
-        val handler = Handler()
-        val runnable = object : Runnable {
-            override fun run() {
-                seconds--
-                if (seconds > 0) {
-                    tvRedirectCountdown.text = "Redirect in ${seconds}s"
-                    handler.postDelayed(this, 1000)
-                } else {
-                    finish()
+        ApiClient.cloudinaryService.uploadImage(body, uploadPreset)
+            .enqueue(object : Callback<CloudinaryUploadResponse> {
+                override fun onResponse(
+                    call: Call<CloudinaryUploadResponse>,
+                    response: Response<CloudinaryUploadResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        onSuccess(response.body()!!.secure_url)
+                    } else {
+                        Toast.makeText(this@EditIdentityActivity, "Upload gagal", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
-        }
-        handler.postDelayed(runnable, 1000)
-    }
 
-    private fun uploadToCloudinary(
-        imageUri: Uri,
-        context: Context,
-        onSuccess: (String) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        val contentResolver = context.contentResolver
-        val inputStream = contentResolver.openInputStream(imageUri)
-        val imageBytes = inputStream?.readBytes() ?: run {
-            onError("Could not read image file.")
-            return
-        }
-
-        val requestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("file", "profile.jpg", imageBytes.toRequestBody("image/*".toMediaTypeOrNull()))
-            .addFormDataPart("upload_preset", "android_image") // Ganti dengan preset milikmu
-            .build()
-
-        val request = Request.Builder()
-            .url("https://api.cloudinary.com/v1_1/delnb4i7e/image/upload") // Ganti dengan nama cloud kamu
-            .post(requestBody)
-            .build()
-
-        OkHttpClient().newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                onError(e.message ?: "Unknown error")
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                val body = response.body?.string()
-                if (response.isSuccessful && body != null) {
-                    val json = JSONObject(body)
-                    val imageUrl = json.getString("secure_url")
-                    onSuccess(imageUrl)
-                } else {
-                    onError("Upload failed: ${response.code}")
+                override fun onFailure(call: Call<CloudinaryUploadResponse>, t: Throwable) {
+                    Toast.makeText(this@EditIdentityActivity, "Upload error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
-            }
-        })
+            })
     }
 }

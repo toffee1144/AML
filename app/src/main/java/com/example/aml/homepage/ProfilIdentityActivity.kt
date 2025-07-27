@@ -4,9 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.aml.profile.DetailProfilActivity
 import com.example.aml.databinding.ActivityProfilIdentityBinding
 import com.example.aml.utility.SessionManager
 import com.example.aml.login.LoginActivity
+import com.bumptech.glide.Glide
+import com.example.aml.R // penting
 
 class ProfilIdentityActivity : AppCompatActivity() {
 
@@ -24,9 +27,22 @@ class ProfilIdentityActivity : AppCompatActivity() {
     private fun setupViews() {
         val username = SessionManager.getUsername(this) ?: "Guest Guest"
         val email = SessionManager.getEmail(this) ?: "guest@example.com"
+        val profilePhotoUrl = SessionManager.getProfilePhotoUrl(this)
 
         binding.tvUsername.text = username
         binding.tvEmail.text = email
+
+        // Logging untuk debug URL
+        android.util.Log.d("ProfilActivity", "Username: $username")
+        android.util.Log.d("ProfilActivity", "Email: $email")
+        android.util.Log.d("ProfilActivity", "Photo URL: $profilePhotoUrl")
+
+        Glide.with(this)
+            .load(profilePhotoUrl)
+            .placeholder(R.drawable.ic_person_placeholder)
+            .error(R.drawable.ic_person_placeholder)
+            .circleCrop()
+            .into(binding.imgProfilePicture)
     }
 
     private fun setupListeners() {

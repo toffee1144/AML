@@ -33,6 +33,8 @@ class MapActivity : AppCompatActivity() {
     private lateinit var tvLocation: TextView
     private lateinit var rvHospitals: RecyclerView
     private val hospitalList = mutableListOf<Hospital>()
+    private var userLat: Double? = null
+    private var userLon: Double? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,27 @@ class MapActivity : AppCompatActivity() {
         rvHospitals = findViewById(R.id.rvHospitals)
         rvHospitals.layoutManager = LinearLayoutManager(this)
         rvHospitals.adapter = HospitalAdapter(hospitalList)
+        val btnOpenMap = findViewById<Button>(R.id.btnOpenMap)
+        btnOpenMap.setOnClickListener {
+            if (userLat != null && userLon != null) {
+                val gmmIntentUri = Uri.parse("geo:$userLat,$userLon?q=$userLat,$userLon(Lokasi Saya)")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+
+                // Jangan pakai setPackage agar lebih kompatibel
+                if (mapIntent.resolveActivity(packageManager) != null) {
+                    startActivity(mapIntent)
+                } else {
+                    // Fallback ke browser kalau Google Maps tidak bisa handle intent-nya
+                    val fallbackUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=$userLat,$userLon")
+                    val browserIntent = Intent(Intent.ACTION_VIEW, fallbackUri)
+                    startActivity(browserIntent)
+                    Log.w("MapActivity", "Fallback ke browser karena Maps tidak dikenali sebagai package")
+                }
+            } else {
+                Log.w("MapActivity", "Lokasi belum tersedia")
+            }
+        }
+
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getUserLocation()
@@ -56,12 +79,13 @@ class MapActivity : AppCompatActivity() {
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             location?.let {
-                val lat = it.latitude
-                val lon = it.longitude
-                getAddress(lat, lon)
-                getNearbyHospitals(lat, lon)
+                userLat = it.latitude
+                userLon = it.longitude
+                getAddress(it.latitude, it.longitude)
+                getNearbyHospitals(it.latitude, it.longitude)
             }
         }
+
     }
 
     private fun getAddress(lat: Double, lon: Double) {
@@ -91,7 +115,7 @@ class MapActivity : AppCompatActivity() {
     }
 
     private fun getNearbyHospitals(lat: Double, lon: Double) {
-        val radius = 3000  // meters
+        val radius = 10000  // 20 km
         val overpassUrl = "https://overpass-api.de/api/interpreter"
         val query = """
             [out:json];

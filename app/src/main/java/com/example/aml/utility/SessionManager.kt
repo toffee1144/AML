@@ -1,6 +1,7 @@
 package com.example.aml.utility
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.core.content.edit
 
 object SessionManager {
@@ -23,7 +24,20 @@ object SessionManager {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             .getString(KEY_EMAIL, "guest@example.com")
     }
+    private fun getPrefs(context: Context): SharedPreferences {
+        return context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+    }
 
+
+    fun setProfilePhotoUrl(context: Context, url: String) {
+        val editor = getPrefs(context).edit()
+        editor.putString("profile_photo_url", url)
+        editor.apply()
+    }
+
+    fun getProfilePhotoUrl(context: Context): String? {
+        return getPrefs(context).getString("profile_photo_url", null)
+    }
 
     fun getUsername(context: Context): String? {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

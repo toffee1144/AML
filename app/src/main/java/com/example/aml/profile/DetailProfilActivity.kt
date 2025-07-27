@@ -1,4 +1,5 @@
-package com.example.aml
+package com.example.aml.profile
+import com.example.aml.R
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,8 @@ import com.example.aml.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class DetailProfilActivity : AppCompatActivity() {
 
@@ -51,6 +54,16 @@ class DetailProfilActivity : AppCompatActivity() {
             finish()
         }
     }
+    fun formatDate(raw: String): String {
+        return try {
+            val parser = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
+            val formatter = SimpleDateFormat("dd MMMM yyyy", Locale("id"))
+            val date = parser.parse(raw)
+            formatter.format(date!!)
+        } catch (e: Exception) {
+            "-"
+        }
+    }
     override fun onResume() {
         super.onResume()
         fetchUserProfile() // Refresh data setiap kembali ke activity ini
@@ -69,9 +82,9 @@ class DetailProfilActivity : AppCompatActivity() {
                         val user = response.body()
                         user?.let {
                             tvFullName.text = it.username
-                            tvDOB.text = it.dateOfBirth
+                            tvDOB.text = formatDate(it.dateOfBirth)
                             tvGender.text = it.sex
-                            tvPhotoName.text = it.profilePhotoUrl.substringAfterLast("/")
+                            tvPhotoName.text = it.profilePhotoUrl?.substringAfterLast("/") ?: "Tidak ada foto"
                             tvEmail.text = it.email
                             tvPassword.text = "********"
 

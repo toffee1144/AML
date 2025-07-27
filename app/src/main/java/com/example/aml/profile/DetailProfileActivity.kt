@@ -1,64 +1,94 @@
-package com.example.aml.profile
+package com.example.aml
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.aml.R
-import com.example.aml.databinding.ActivityDetailProfilBinding
-import com.example.aml.utility.SessionManager
+import com.bumptech.glide.Glide
+import com.example.aml.profile.UserProfileResponse
+import com.example.aml.network.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailProfilActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailProfilBinding
-    private var isPasswordVisible = false
+    private lateinit var tvFullName: TextView
+    private lateinit var tvDOB: TextView
+    private lateinit var tvGender: TextView
+    private lateinit var tvPhotoName: TextView
+    private lateinit var tvEmail: TextView
+    private lateinit var tvPassword: TextView
+    private lateinit var imgProfile: ImageView
+    private lateinit var btnEditIdentity: Button
+    private lateinit var btnBack: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailProfilBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_detail_profil)
 
-        setupView()
-        setupListeners()
-    }
+        // Bind layout
+        tvFullName = findViewById(R.id.tvFullName)
+        tvDOB = findViewById(R.id.tvDOB)
+        tvGender = findViewById(R.id.tvGender)
+        tvPhotoName = findViewById(R.id.tvPhotoName)
+        tvEmail = findViewById(R.id.tvEmail)
+        tvPassword = findViewById(R.id.tvPassword)
+        imgProfile = findViewById(R.id.imgProfile)
+        btnEditIdentity = findViewById(R.id.btnEditIdentity)
+        btnBack = findViewById(R.id.btnBack)
 
-    private fun setupView() {
-        val username = SessionManager.getUsername(this) ?: "Guest Guest"
-        val email = SessionManager.getEmail(this) ?: "guest@example.com"
+        // Fetch dan tampilkan profil
+        fetchUserProfile()
 
-        // Set teks berdasarkan data session
-        binding.tvTitle.text = "Identity Details"
-        binding.tvEmail.text = email
-        binding.tvPhotoName.text = "Profile.jpg" // hardcoded, bisa kamu ubah kalau ambil dari storage/server
-
-        // Contoh static name dan gender, kamu bisa ubah kalau sudah ada datanya
-        binding.apply {
-            // Full name, DOB, and gender text
-            // Kalau nanti ambil dari server, update ini pakai ViewModel atau data tambahan dari SessionManager
-            // Contoh:
-            // tvFullName.text = nameFromServer
-            // tvDOB.text = dobFromServer
-            // tvGender.text = genderFromServer
+        // Navigasi ke EditIdentityActivity
+        btnEditIdentity.setOnClickListener {
+            startActivity(Intent(this, EditIdentityActivity::class.java))
         }
-    }
 
-    private fun setupListeners() {
-        // Tombol kembali
-        binding.btnBack.setOnClickListener {
+        // Kembali
+        btnBack.setOnClickListener {
             finish()
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        fetchUserProfile() // Refresh data setiap kembali ke activity ini
+    }
 
-        // Tombol show/hide password
-        binding.btnShowPassword.setOnClickListener {
-            isPasswordVisible = !isPasswordVisible
-            binding.tvPassword.text = if (isPasswordVisible) "password123" else "********"
-            // ganti icon jika mau
-        }
+    private fun fetchUserProfile() {
+        val userId = "5e27c94c-105c-4658-bf4a-d5a06a0b751e" // Ganti dengan SessionManager jika tersedia
 
-        // Tombol edit identitas
-        binding.btnEditIdentity.setOnClickListener {
-            Toast.makeText(this, "Edit identity clicked", Toast.LENGTH_SHORT).show()
-            // TODO: Pindah ke halaman edit jika sudah dibuat
-        }
+        ApiClient.apiService.getUserProfile(userId)
+            .enqueue(object : Callback<UserProfileResponse> {
+                override fun onResponse(
+                    call: Call<UserProfileResponse>,
+                    response: Response<UserProfileResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val user = response.body()
+                        user?.let {
+                            tvFullName.text = it.username
+                            tvDOB.text = it.dateOfBirth
+                            tvGender.text = it.sex
+                            tvPhotoName.text = it.profilePhotoUrl.substringAfterLast("/")
+                            tvEmail.text = it.email
+                            tvPassword.text = "********"
+
+                            // Jika ada Glide, tampilkan profil URL
+                            Glide.with(this@DetailProfilActivity)
+                                .load(it.profilePhotoUrl)
+                                .placeholder(R.drawable.ic_login)
+                                .into(imgProfile)
+                        }
+                    } else {
+                        Toast.makeText(this@DetailProfilActivity, "Gagal ambil profil", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
+                    Toast.makeText(this@DetailProfilActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 }

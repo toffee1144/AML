@@ -126,7 +126,7 @@ class MapActivity : AppCompatActivity() {
     }
 
     private fun getNearbyHospitals(lat: Double, lon: Double) {
-        val radius = 10000  // 10 km
+        val radius = 5000  // 5 km
         val overpassUrl = "https://overpass-api.de/api/interpreter"
         val query = """
             [out:json];

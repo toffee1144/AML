@@ -20,6 +20,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.core.content.ContextCompat
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -69,6 +70,10 @@ class EditIdentityActivity : AppCompatActivity() {
         rgSex = findViewById(R.id.rgSex)
         rbMale = findViewById(R.id.rbMale)
         rbFemale = findViewById(R.id.rbFemale)
+        val tealColor = ContextCompat.getColorStateList(this, R.color.teal)
+        rbMale.buttonTintList = tealColor
+        rbFemale.buttonTintList = tealColor
+
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         etConfirmPassword = findViewById(R.id.etConfirmPassword)
@@ -131,6 +136,7 @@ class EditIdentityActivity : AppCompatActivity() {
                     }
                 })
         }
+
 
         loadUserProfile()
     }

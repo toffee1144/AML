@@ -35,8 +35,9 @@
                 android:layout_height="wrap_content"
                 android:text="Buka Lokasi Saya di Maps"
                 android:layout_marginTop="12dp"
-                android:backgroundTint="#aa42f5"
-                android:textColor="@android:color/white"/>
+                android:backgroundTint="@color/teal"
+                android:textColor="@android:color/white"
+                />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

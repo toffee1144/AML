@@ -78,13 +78,17 @@ class MapActivity : AppCompatActivity() {
         }
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            location?.let {
-                userLat = it.latitude
-                userLon = it.longitude
-                getAddress(it.latitude, it.longitude)
-                getNearbyHospitals(it.latitude, it.longitude)
+            if (location != null) {
+                Log.d("MapActivity", "Lokasi didapat: ${location.latitude}, ${location.longitude}")
+                userLat = location.latitude
+                userLon = location.longitude
+                getAddress(location.latitude, location.longitude)
+                getNearbyHospitals(location.latitude, location.longitude)
+            } else {
+                Log.e("MapActivity", "Lokasi NULL")
             }
         }
+
 
     }
 
@@ -97,7 +101,10 @@ class MapActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
-                val json = JSONObject(response.body?.string() ?: "")
+                val bodyString = response.body?.string() ?: ""
+                Log.d("MapActivity", "Response address JSON: $bodyString")
+
+                val json = JSONObject(bodyString)
                 val address = json.getJSONObject("address")
                 val locationName = listOfNotNull(
                     address.optString("suburb", null),
@@ -105,17 +112,21 @@ class MapActivity : AppCompatActivity() {
                     address.optString("city_district", null),
                     address.optString("city", null)
                 ).joinToString(", ")
+
                 runOnUiThread { tvLocation.text = locationName }
             }
 
+
             override fun onFailure(call: Call, e: IOException) {
+                Log.e("MapActivity", "Gagal getAddress: ${e.message}")
+
                 runOnUiThread { tvLocation.text = "Gagal dapat lokasi" }
             }
         })
     }
 
     private fun getNearbyHospitals(lat: Double, lon: Double) {
-        val radius = 10000  // 20 km
+        val radius = 10000  // 10 km
         val overpassUrl = "https://overpass-api.de/api/interpreter"
         val query = """
             [out:json];
@@ -136,10 +147,11 @@ class MapActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
+
                 val res = response.body?.string() ?: return
                 val json = JSONObject(res)
                 val elements = json.getJSONArray("elements")
-
+                Log.d("MapActivity", "Overpass response: $res")
                 hospitalList.clear()
                 for (i in 0 until elements.length()) {
                     val el = elements.getJSONObject(i)
@@ -159,6 +171,8 @@ class MapActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("HospitalFetch", "Error: ${e.message}")
+                Log.e("MapActivity", "Gagal fetch RS: ${e.message}")
+
             }
         })
     }

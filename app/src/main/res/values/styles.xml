@@ -7,5 +7,36 @@
         <item name="android:textColor">#222222</item>
         <item name="android:textSize">14sp</item>
     </style>
+    <style name="Theme.YourApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Warna tombol RadioButton saat aktif -->
+        <item name="colorControlActivated">@color/teal</item>
+    </style>
+    <style name="CustomRadioButtonStyle" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="materialThemeOverlay">@style/CustomRadioButtonOverlay</item>
+    </style>
+
+    <style name="CustomRadioButtonOverlay" parent="">
+        <item name="colorControlActivated">@color/teal</item>
+        <item name="colorOnSurface">@android:color/black</item> <!-- Text and unselected color -->
+    </style>
+
+    <style name="DetailLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="DetailValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
 
 </resources>

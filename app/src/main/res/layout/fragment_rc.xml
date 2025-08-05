@@ -152,7 +152,12 @@
             android:textColor="#000000"
             android:textSize="14sp"
             android:layout_marginBottom="16dp"/>
-
+        <Button
+            android:id="@+id/btnOpenMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Find Nearby Hospitals"
+            android:backgroundTint="@color/teal"/>
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"

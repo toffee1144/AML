@@ -1,5 +1,6 @@
 package com.example.aml.network
 
+import com.example.aml.model.CloudinaryUploadResponse
 import com.example.aml.model.FormData
 import com.example.aml.model.LatestDataResponse
 import com.example.aml.model.LoginRequest
@@ -8,12 +9,20 @@ import com.example.aml.model.ReportItem
 import com.example.aml.model.ReportSummary
 import com.example.aml.model.SignUpRequest
 import com.example.aml.model.SignUpResponse
+import com.example.aml.model.UpdateProfileResponse
+import com.example.aml.profile.UpdateProfileRequest
+import com.example.aml.profile.UserProfileResponse
+import okhttp3.MultipartBody
+
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Query
 import retrofit2.http.Path
+import retrofit2.http.PUT
+import retrofit2.http.Part
 
 interface ApiService {
     @POST("/register-guest")
@@ -37,8 +46,21 @@ interface ApiService {
     @GET("get-report-summary/{uid}")
     fun getReportSummary(@Path("uid") uid: String): Call<ReportSummary>
 
-    @POST("login") // Replace with your actual endpoint
+    @POST("login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
+
+    @PUT("update-profile")
+    fun updateProfile(@Body request: UpdateProfileRequest): Call<UpdateProfileResponse>
+
+    @GET("get-profile/{id}")
+    fun getUserProfile(@Path("id") userId: String): Call<UserProfileResponse>
+
+    @Multipart
+    @POST("https://api.cloudinary.com/v1_1/delnb4i7e/image/upload")
+    fun uploadImage(
+        @Part file: MultipartBody.Part,
+        @Part upload_preset: MultipartBody.Part
+    ): Call<CloudinaryUploadResponse>
 
 }
 

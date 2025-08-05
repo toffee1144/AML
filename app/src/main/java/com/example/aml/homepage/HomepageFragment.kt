@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.aml.databinding.FragmentHomepageBinding
 import com.example.aml.R
 import com.example.aml.homepage.checkup.CheckupFragment
@@ -36,6 +37,14 @@ class HomepageFragment : Fragment() {
         registerUser(userId)
 
         updateUsername()
+
+        val photoUrl = SessionManager.getProfilePhotoUrl(requireContext())
+        Log.d("HomepageFragment", "Photo URL: $photoUrl")
+
+        Glide.with(requireContext())
+            .load(photoUrl)
+            .placeholder(R.drawable.ic_guest)
+            .into(binding.imgProfileIcon)
 
         if (isFirstTime()) {
             binding.tvPercentage.text = "No Data Found!"
@@ -80,7 +89,14 @@ class HomepageFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         updateUsername()
+
+        val photoUrl = SessionManager.getProfilePhotoUrl(requireContext())
+        Glide.with(requireContext())
+            .load(photoUrl)
+            .placeholder(R.drawable.ic_guest)
+            .into(binding.imgProfileIcon)
     }
+
 
     private fun registerUser(userId: String) {
         val body = mapOf("userId" to userId)

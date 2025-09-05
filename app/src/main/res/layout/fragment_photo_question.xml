@@ -3,10 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <!-- Konten Scrollable -->
+    <!-- Scrollable Content -->
     <ScrollView
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -14,8 +12,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <!-- HEADER -->
             <FrameLayout
                 android:layout_width="match_parent"
@@ -33,7 +31,7 @@
                     android:background="@drawable/bg_circle_back"
                     android:src="@drawable/ic_back_arrow"
                     android:scaleType="center"
-                    android:contentDescription="Back Button"/>
+                    android:contentDescription="@string/back_button"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -59,31 +57,27 @@
                 android:layout_marginHorizontal="17dp"
                 android:layout_marginBottom="2dp">
 
-
-                <!-- Isi pertanyaan -->
+                <!-- Question Content -->
                 <TextView
                     android:id="@+id/textQuestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Apakah Anda memiliki cairan hidung kental berwarna kuning atau hijau?"
+                    android:text="@string/question_thick_nasal_discharge"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:justificationMode="inter_word"
-
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/teal"
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>
-
-            <!-- PETUNJUK -->
 
             <!-- ERROR -->
             <TextView
                 android:id="@+id/errorText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Silakan pilih jawaban!"
+                android:text="@string/error_select_answer"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
                 android:textAlignment="center"
@@ -93,7 +87,7 @@
                 android:id="@+id/textFotoIngus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sertakan foto ingus Anda"
+                android:text="@string/include_nasal_photo"
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
@@ -105,34 +99,33 @@
 
             <TextView
                 android:id="@+id/btnUploadPhoto"
-                android:layout_width="120dp"
-                android:layout_height="45dp"
+                android:layout_width="142dp"
+                android:layout_height="56dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:gravity="center"
-                android:text="Upload Foto"
-                android:textColor="@color/teal"
-                android:fontFamily="@font/montserrat_bold"
-                android:textSize="14sp"
                 android:background="@drawable/shape_teal_card_no_bg"
-                android:padding="10dp"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/upload_photo"
+                android:textColor="@color/teal"
+                android:textSize="14sp" />
 
-            <!-- Spacer biar ScrollView ngasih ruang di bawah tombol -->
-
+            <!-- Spacer to give ScrollView space below button -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- TOMBOL NEXT KECIL DI KANAN BAWAH -->
+    <!-- SMALL NEXT BUTTON AT BOTTOM RIGHT -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Next Page"
+        android:text="@string/next_page"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:layout_marginBottom="20dp"

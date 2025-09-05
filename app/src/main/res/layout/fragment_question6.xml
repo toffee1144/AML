@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Konten Scrollable -->
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
                     android:background="@drawable/bg_circle_back"
                     android:src="@drawable/ic_back_arrow"
                     android:scaleType="center"
-                    android:contentDescription="Back Button"/>
+                    android:contentDescription="@string/back_button"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -50,7 +50,7 @@
 
             </FrameLayout>
 
-            <!-- Pertanyaan -->
+            <!-- QUESTION -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6."
+                    android:text="@string/question_number_6"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_semibold"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Berapa lama sejak gejala Anda berlangsung?"
+                    android:text="@string/question_duration"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:justificationMode="inter_word"
@@ -82,7 +82,7 @@
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>
 
-            <!-- Radio Group Vertikal -->
+            <!-- RADIO GROUP -->
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tidak ada gejala sama sekali"
+                        android:text="@string/option_no_symptoms"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
@@ -134,7 +134,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kurang dari 3 hari"
+                        android:text="@string/option_less_than_3_days"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
@@ -159,7 +159,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Antara 3–5 hari"
+                        android:text="@string/option_3_to_5_days"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
@@ -184,7 +184,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Antara 5–10 hari"
+                        android:text="@string/option_5_to_10_days"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
@@ -209,7 +209,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lebih dari 10 hari"
+                        android:text="@string/option_more_than_10_days"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
@@ -217,13 +217,12 @@
                 </LinearLayout>
             </RadioGroup>
 
-
             <!-- ERROR -->
             <TextView
                 android:id="@+id/errorText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Silakan pilih jawaban!"
+                android:text="@string/error_select_answer"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
                 android:textAlignment="center"
@@ -236,12 +235,12 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- TOMBOL NEXT -->
+    <!-- NEXT BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Next Page"
+        android:text="@string/next_page"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"
@@ -249,12 +248,12 @@
         android:textSize="16sp"
         android:background="@drawable/shape_teal_card" />
 
-    <!-- TOMBOL PREVIOUS -->
+    <!-- PREVIOUS BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPrevious"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Previous Page"
+        android:text="@string/previous_page"
         android:layout_gravity="bottom|start"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"

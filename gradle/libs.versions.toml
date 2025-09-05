@@ -1,5 +1,5 @@
 [versions]
-agp = "8.11.1"
+agp = "8.9.2"
 converterGson = "3.0.0"
 coreSplashscreenVersion = "1.0.1"
 kotlin = "2.0.21"

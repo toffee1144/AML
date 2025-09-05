@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Konten Scrollable -->
+    <!-- NEXT BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext2"
         android:layout_width="125dp"
@@ -12,10 +12,11 @@
         android:layout_margin="20dp"
         android:background="@drawable/shape_teal_card"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Next Page"
+        android:text="@string/next_page"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +44,7 @@
                     android:background="@drawable/bg_circle_back"
                     android:src="@drawable/ic_back_arrow"
                     android:scaleType="center"
-                    android:contentDescription="Back Button" />
+                    android:contentDescription="@string/back_button" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -62,7 +63,7 @@
 
             </FrameLayout>
 
-            <!-- Pertanyaan -->
+            <!-- Question -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7."
+                    android:text="@string/question_number_7"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_semibold"
@@ -85,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Apakah Anda mengalami gejala batuk?"
+                    android:text="@string/question_cough"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:justificationMode="inter_word"
@@ -94,7 +95,7 @@
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>
 
-            <!-- Label Jawaban Anda -->
+            <!-- Answer Options -->
             <RadioGroup
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
@@ -104,6 +105,7 @@
                 android:gravity="start"
                 android:paddingHorizontal="45dp">
 
+                <!-- Option 1 -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -122,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Iya"
+                        android:text="@string/answer_yes"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
@@ -133,6 +135,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"/>
+
+                <!-- Option 2 -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,16 +155,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tidak"
+                        android:text="@string/answer_no"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
                         android:fontFamily="@font/montserrat_medium" />
                 </LinearLayout>
-
             </RadioGroup>
-
-            <!-- TextArea -->
 
             <!-- Spacer -->
             <View
@@ -169,14 +170,12 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- TOMBOL NEXT -->
-
-    <!-- TOMBOL PREVIOUS -->
+    <!-- PREVIOUS BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPrevious"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Previous Page"
+        android:text="@string/previous_page"
         android:layout_gravity="bottom|start"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"

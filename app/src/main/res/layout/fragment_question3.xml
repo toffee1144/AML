@@ -31,7 +31,7 @@
                     android:background="@drawable/bg_circle_back"
                     android:src="@drawable/ic_back_arrow"
                     android:scaleType="center"
-                    android:contentDescription="Back Button"/>
+                    android:contentDescription="@string/back_button" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3."
+                    android:text="@string/question_number_3"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_semibold"
@@ -77,8 +77,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:justificationMode="inter_word"
                     android:lineSpacingExtra="2dp"
-                    android:text="Apakah Anda merasakan nyeri atau tekanan pada wajah Anda?"
-
+                    android:text="@string/question_face_pain"
                     android:textColor="@color/teal"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -88,7 +87,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="(pilih 1 jika tidak ada gejala sama sekali dan 5 jika terasa nyeri)"
+                android:text="@string/instruction_face_pain"
                 android:textSize="13sp"
                 android:textColor="#666666"
                 android:lineSpacingExtra="2dp"
@@ -96,6 +95,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"/>
 
+            <!-- SKALA LIKERT -->
             <!-- SKALA LIKERT -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -280,7 +280,7 @@
                 android:id="@+id/errorText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Silakan pilih jawaban!"
+                android:text="@string/error_select_answer"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
                 android:textAlignment="center"
@@ -298,7 +298,7 @@
         android:id="@+id/btnNext"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Next Page"
+        android:text="@string/next_page"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"
@@ -311,7 +311,7 @@
         android:id="@+id/btnPrevious"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Previous Page"
+        android:text="@string/previous_page"
         android:layout_gravity="bottom|start"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"

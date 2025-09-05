@@ -31,7 +31,7 @@
                     android:background="@drawable/bg_circle_back"
                     android:src="@drawable/ic_back_arrow"
                     android:scaleType="center"
-                    android:contentDescription="Back Button"/>
+                    android:contentDescription="@string/back_button"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4."
+                    android:text="@string/question_number_4"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_semibold"
@@ -74,11 +74,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Apakah anda mengalami demam tinggi belakangan ini?"
+                    android:text="@string/question_high_fever"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:justificationMode="inter_word"
-
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/teal"
                     android:lineSpacingExtra="2dp" />
@@ -88,7 +87,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="(pilih 1 jika tidak ada demam sama sekali dan 5 jika demam tinggi lebih dari 39 derajat Celcius)"
+                android:text="@string/instruction_high_fever"
                 android:textSize="13sp"
                 android:textColor="#666666"
                 android:lineSpacingExtra="2dp"
@@ -274,12 +273,13 @@
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <!-- ERROR -->
             <TextView
                 android:id="@+id/errorText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Silakan pilih jawaban!"
+                android:text="@string/error_select_answer"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
                 android:textAlignment="center"
@@ -297,7 +297,7 @@
         android:id="@+id/btnNext"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Next Page"
+        android:text="@string/next_page"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"
@@ -310,7 +310,7 @@
         android:id="@+id/btnPrevious"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Previous Page"
+        android:text="@string/previous_page"
         android:layout_gravity="bottom|start"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"

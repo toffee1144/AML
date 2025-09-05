@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AML</string>
+    <string name="app_name">SinusScan</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -42,6 +42,69 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="question_thick_nasal_discharge">Do you have thick nasal discharge that is yellow or green?</string>
+    <string name="include_nasal_photo">Include a photo of your nasal discharge</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="question_nasal_flow_last_days">How have you felt the flow of nasal discharge from your nose in the last few days?</string>
+    <string name="instructions_select_number">(Select one number from 1 to 5 that best matches your condition)</string>
+    <string name="r1_option">No nasal discharge at all</string>
+    <string name="r2_option">A little discharge, but not flowing out</string>
+    <string name="r3_option">Discharge flows lightly forward (nose)</string>
+    <string name="r4_option">Discharge flows quite a lot forward or to the back of the throat (post-nasal drip)</string>
+    <string name="r5_option">Discharge flows very much and continuously, feels disturbing (both forward and backward)</string>
+    <string name="likert_label_1">No nasal discharge at all</string>
+    <string name="likert_label_2">A little nasal discharge, but not flowing out</string>
+    <string name="likert_label_3">Nasal discharge flows lightly forward</string>
+    <string name="likert_label_4">Nasal discharge flows quite a lot forward or down the throat (post-nasal drip)</string>
+    <string name="likert_label_5">Nasal discharge flows very much and continuously, feels disturbing (forward or backward)</string>
+    <string name="back_button">Back Button</string>
+    <string name="question_number_3">3.</string>
+    <string name="question_face_pain">Do you feel pain or pressure on your face?</string>
+    <string name="instruction_face_pain">(select 1 if there are no symptoms at all and 5 if the pain is severe)</string>
+    <string name="error_select_answer">Please select an answer!</string>
+    <string name="next_page">Next Page</string>
+    <string name="previous_page">Previous Page</string>
+    <string name="question_number_4">4.</string>
+    <string name="question_high_fever">Have you experienced a high fever recently?</string>
+    <string name="instruction_high_fever">(choose 1 if there is no fever at all and 5 if the fever is higher than 39°C)</string>
+    <string name="question_number_5">5.</string>
+    <string name="question_nasal_congestion">Do you experience nasal congestion or a feeling of fullness in your nose?</string>
+    <string name="instruction_nasal_congestion">(select 1 if there is no difficulty at all and 5 if the nasal congestion or fullness is very severe)</string>
+    <string name="question_number_6">6.</string>
+    <string name="question_duration">How long have your symptoms lasted?</string>
+
+    <string name="option_no_symptoms">No symptoms at all</string>
+    <string name="option_less_than_3_days">Less than 3 days</string>
+    <string name="option_3_to_5_days">Between 3–5 days</string>
+    <string name="option_5_to_10_days">Between 5–10 days</string>
+    <string name="option_more_than_10_days">More than 10 days</string>
+
+    <string name="question_number_7">7.</string>
+    <string name="question_cough">Do you experience coughing symptoms?</string>
+
+    <string name="answer_yes">Yes</string>
+    <string name="answer_no">No</string>
+
+    <string name="question_number_8">8.</string>
+    <string name="question_other_symptoms">Do you experience any other symptoms not mentioned in the previous questions?</string>
+
+    <string name="your_answer">Your Answer</string>
+    <string name="hint_other_symptoms">Write other symptoms here...</string>
+
+    <string name="submit">Submit</string>
+    <string name="result_title">Check Up Completed\nReport submitted and saved</string>
+    <string name="result_subtitle">Check-up list completed, report has been sent for analysis and safely stored.\n\nPlease wait while you will be redirected!</string>
+
+    <!-- Map Activity -->
+    <string name="btn_open_map">Open Map</string>
+    <string name="location_not_available">Location not available</string>
+    <string name="location_failed">Failed to get location</string>
+    <string name="map_fallback_browser">Fallback to browser because Maps was not recognized as a package</string>
+    <string name="location_got">Location acquired: %1$s, %2$s</string>
+    <string name="location_null">Location is NULL</string>
+    <string name="hospital_fetch_failed">Failed to fetch hospitals: %1$s</string>
+    <string name="hospital_unnamed">Unnamed Hospital</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

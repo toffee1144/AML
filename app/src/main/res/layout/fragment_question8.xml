@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Konten Scrollable -->
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
                     android:background="@drawable/bg_circle_back"
                     android:src="@drawable/ic_back_arrow"
                     android:scaleType="center"
-                    android:contentDescription="Back Button" />
+                    android:contentDescription="@string/back_button" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -50,7 +50,7 @@
 
             </FrameLayout>
 
-            <!-- Pertanyaan -->
+            <!-- Question -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8."
+                    android:text="@string/question_number_8"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:fontFamily="@font/montserrat_semibold"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Apakah Anda mengalami gejala lain yang belum disebutkan di pertanyaan sebelumnya?"
+                    android:text="@string/question_other_symptoms"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:justificationMode="inter_word"
@@ -82,18 +82,18 @@
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>
 
-            <!-- Label Jawaban Anda -->
+            <!-- Answer Label -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Jawaban Anda"
+                android:text="@string/your_answer"
                 android:textSize="14sp"
                 android:textColor="#444"
                 android:layout_marginHorizontal="35dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat_medium" />
 
-            <!-- TextArea -->
+            <!-- Text Area -->
             <EditText
                 android:id="@+id/inputText"
                 android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                 android:background="@drawable/edittext_background"
                 android:gravity="top|start"
                 android:padding="12dp"
-                android:hint="Tuliskan gejala lain di sini..."
+                android:hint="@string/hint_other_symptoms"
                 android:textSize="16sp"
                 android:fontFamily="@font/montserrat_regular"
                 android:inputType="textMultiLine"
@@ -116,12 +116,12 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- TOMBOL NEXT -->
+    <!-- NEXT BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Submit"
+        android:text="@string/submit"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"
@@ -129,12 +129,12 @@
         android:textSize="16sp"
         android:background="@drawable/shape_teal_card" />
 
-    <!-- TOMBOL PREVIOUS -->
+    <!-- PREVIOUS BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPrevious"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Previous Page"
+        android:text="@string/previous_page"
         android:layout_gravity="bottom|start"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"

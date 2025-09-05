@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Konten Scrollable -->
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,7 @@
                     android:background="@drawable/bg_circle_back"
                     android:src="@drawable/ic_back_arrow"
                     android:scaleType="center"
-                    android:contentDescription="Back Button"/>
+                    android:contentDescription="@string/back_button"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                 android:layout_marginHorizontal="17dp"
                 android:layout_marginBottom="2dp">
 
-                <!-- Nomor -->
+                <!-- Number -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,27 +68,26 @@
                     android:textColor="@color/teal"
                     android:layout_marginRight="4dp" />
 
-                <!-- Isi pertanyaan -->
+                <!-- Question -->
                 <TextView
                     android:id="@+id/textQuestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Bagaimana Anda merasakan aliran ingus dari hidung Anda dalam beberapa hari terakhir?"
+                    android:text="@string/question_nasal_flow_last_days"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:justificationMode="inter_word"
-
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/teal"
                     android:lineSpacingExtra="2dp" />
             </LinearLayout>
 
-            <!-- PETUNJUK -->
+            <!-- Instructions -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" (Pilih salah satu angka dari 1 sampai 5 yang paling sesuai dengan kondisi Anda)"
+                android:text="@string/instructions_select_number"
                 android:textSize="13sp"
                 android:textColor="#666666"
                 android:lineSpacingExtra="2dp"
@@ -122,7 +121,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tidak ada ingus sama sekali"
+                        android:text="@string/r1_option"
                         android:layout_marginStart="12dp"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"
@@ -147,11 +146,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/r2_option"
                         android:layout_marginStart="12dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Ada sedikit ingus, tapi tidak mengalir keluar"
                         android:textColor="@android:color/black"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:fontFamily="@font/montserrat_medium" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -172,11 +171,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/r3_option"
                         android:layout_marginStart="12dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Ingus terasa mengalir ke depan (hidung) secara ringan"
                         android:textColor="@android:color/black"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:fontFamily="@font/montserrat_medium" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -197,11 +196,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/r4_option"
                         android:layout_marginStart="12dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Ingus mengalir cukup banyak ke depan atau ke belakang tenggorokan (post-nasal drip)"
                         android:textColor="@android:color/black"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:fontFamily="@font/montserrat_medium" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -222,11 +221,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/r5_option"
                         android:layout_marginStart="12dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Ingus mengalir sangat banyak dan terus-menerus, terasa mengganggu (baik ke depan maupun ke belakang)"
                         android:textColor="@android:color/black"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:fontFamily="@font/montserrat_medium" />
                 </LinearLayout>
             </RadioGroup>
 
@@ -235,25 +234,25 @@
                 android:id="@+id/errorText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Silakan pilih jawaban!"
+                android:text="@string/error_select_answer"
                 android:textColor="@android:color/holo_red_dark"
                 android:visibility="gone"
                 android:textAlignment="center"
                 android:layout_marginTop="12dp" />
 
-            <!-- Spacer untuk ruang tombol -->
+            <!-- Spacer for button space -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="80dp" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- TOMBOL NEXT -->
+    <!-- NEXT BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnNext"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Next Page"
+        android:text="@string/next_page"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"
@@ -261,12 +260,12 @@
         android:textSize="16sp"
         android:background="@drawable/shape_teal_card" />
 
-    <!-- TOMBOL PREVIOUS -->
+    <!-- PREVIOUS BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPrevious"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:text="Previous Page"
+        android:text="@string/previous_page"
         android:layout_gravity="bottom|start"
         android:layout_margin="20dp"
         android:textColor="@android:color/white"

@@ -57,7 +57,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Full Name" />
+                        android:text="Nickname" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -70,25 +70,25 @@
                             android:orientation="horizontal">
 
                             <EditText
-                                android:id="@+id/editTextFullName"
+                                android:id="@+id/editTextNickname"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@android:color/transparent"
                                 android:paddingStart="8dp"
-                                android:hint="Your Full Name"
+                                android:hint="Your Nickname"
                                 android:textColorHint="#AAA"
                                 android:inputType="textPersonName"
                                 android:textColor="#000" />
                         </LinearLayout>
                     </FrameLayout>
 
-                    <!-- Email -->
+                    <!-- Token -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Email" />
+                        android:text="Token (5 digits)" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -101,15 +101,16 @@
                             android:orientation="horizontal">
 
                             <EditText
-                                android:id="@+id/editTextEmail"
+                                android:id="@+id/editTextToken"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@android:color/transparent"
                                 android:paddingStart="8dp"
-                                android:hint="Your Email"
+                                android:hint="Enter 5-digit Token"
                                 android:textColorHint="#AAA"
-                                android:inputType="textEmailAddress"
+                                android:inputType="number"
+                                android:maxLength="5"
                                 android:textColor="#000" />
                         </LinearLayout>
                     </FrameLayout>
@@ -235,10 +236,14 @@
                     android:textColor="@color/black"
                     android:layout_marginBottom="2dp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                <CheckBox
+                    android:id="@+id/checkBoxPrivacyPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I agree to the Privacy Policy"
+                    android:textSize="14sp"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/black"/>
 
                 <android.widget.Button
                     android:id="@+id/Btn_Register"
@@ -254,11 +259,6 @@
                     android:textColor="@color/white"
                     android:elevation="0dp"
                     android:stateListAnimator="@null" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
 
             </LinearLayout>
         </FrameLayout>

@@ -26,7 +26,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
+            android:layout_marginTop="16dp"
             android:paddingTop="8dp">
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -71,7 +73,7 @@
             android:layout_width="220dp"
             android:layout_height="250dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="67dp"
             android:background="@drawable/group__1_" />
     </LinearLayout>
@@ -80,12 +82,13 @@
     <LinearLayout
         android:id="@+id/middle_content"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:paddingHorizontal="24dp"
+        android:layout_marginTop="0dp"
+        android:paddingTop="0dp"
         app:layout_constraintTop_toBottomOf="@id/header_section"
-        app:layout_constraintBottom_toTopOf="@id/action_section"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -127,7 +130,7 @@
                 android:fontFamily="@font/montserrat_bolditalic"
                 android:textColor="#25BEBE"
                 android:textSize="18sp"
-                android:layout_gravity="start" />
+                android:layout_gravity="center" />
 
             <TextView
                 android:id="@+id/tvPercentage"
@@ -166,32 +169,35 @@
         android:id="@+id/action_section"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingBottom="16dp"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="36dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/middle_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"> <!-- ⬅ This puts it in the vertical middle of that gap -->
 
         <!-- Check Up -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
-            android:layout_marginEnd="20dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/layout_checkup"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@drawable/shape_teal_card"
-                android:padding="16dp"
-                android:clipToOutline="true">
+                android:clickable="true"
+                android:clipToOutline="true"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <ImageView
                     android:layout_width="88dp"
@@ -203,29 +209,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="5dp"
                 android:text="Check Up"
                 android:textColor="#25BEBE"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="5dp"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Report -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/layout_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@drawable/shape_teal_card"
-                android:padding="16dp"
-                android:clipToOutline="true">
+                android:clipToOutline="true"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <ImageView
                     android:layout_width="88dp"
@@ -237,13 +243,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Report"
                 android:textColor="#25BEBE"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="4dp" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
